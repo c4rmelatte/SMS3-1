@@ -40,7 +40,24 @@ Route::get('/admin/subject', function () {
 // STUDENT *************************************************************************************
 
 Route::get('/student', function () {
-   // return view('index');
+   return view('student.studentindex');
+});
+
+Route::get('/student/announcements', function () {
+   return view('student.pages.announcement');
+});
+
+
+Route::get('/student/activities', function () {
+   return view('student.pages.activities');
+});
+
+Route::get('/student/enrollmentform', function () {
+   return view('student.pages.enrollmentform');
+});
+
+Route::get('/student/attendance', function () {
+   return view('student.pages.attendance');
 });
 
 

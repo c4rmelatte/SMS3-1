@@ -73,6 +73,29 @@
         </select>
        </div>
 
+       <div class="col-span-4 sm:col-span-4">
+            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+            <select id="category"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                <option selected="">Select Department</option>
+                <option value="CECT">College of Engineering and Computer Technology</option>
+                <option value="CON">College of Nursing</option>
+                <option value="CBA">College of Business and Accountacy</option>
+                <option value="CAMS">College of Allied Medical Sciences</option>
+                <option value="COED">College of Education</option>
+                <option value="CCJE">CCollege of Criminal Justice Education</option>
+                <option value="CAS">College of Arts and Sciences</option>
+                <option value="CHTM">College of Hospitality and Tourism Management</option>
+        </select>
+       </div>
+
+       <div class="col-span-4 sm:col-span-1">
+            <label for="accountNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account Number</label>
+            <input type="number" name="accountNumber"id="accountNumber"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Account Number" required=""/>
+            
+       </div>
+
+
       </div>
       <div class="flex justify-center">
        <button type="submit" class="text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">

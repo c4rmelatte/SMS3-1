@@ -31,8 +31,8 @@
 </head>
 <body>
     <div>
-        @include('professor.components.sidebar')
-        @include('professor.components.nav')
+        @include('student.components.sidebar')
+        @include('student.components.nav')
     </div>
 
     <div>
