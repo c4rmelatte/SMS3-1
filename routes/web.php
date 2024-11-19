@@ -11,6 +11,8 @@ use App\Http\Controllers\DTRController;
 use App\Http\Controllers\HRController;
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Models\Building;
 use App\Models\Room;
 use App\Models\Department;
@@ -59,12 +61,9 @@ Route::get('/admin/departments', function () {
    return view('admin.pages.department')->with(['buildings' => $buildings, 'departments' => $departments]);
 });
 
+//************ Subjects
 
-
-Route::get('/admin/subject', function () {
-    return view('admin.pages.subject');
-});
-
+Route::get('/admin/subject',[SubjectController::class, 'index']);
 
 // STUDENT *************************************************************************************
 
@@ -99,7 +98,7 @@ Route::get('/treasury', function () {
     $funds = TotalFunds::firstOrCreate(
       ['funds'=>0]
     );
-    return view('treasury.pages.treasury')->with('products', $purpose)->with('funds',$funds)->with('payments',$payments); 
+    return view('treasury.pages.treasury')->with('products', $purpose)->with('funds', $funds)->with('payments',$payments); 
     
     // nawawala yung products dito ata kaya di nagloload 
 
@@ -158,9 +157,18 @@ Route::get('/programhead', function () {
     return view('programhead.pages.schedule');
  });
 
- Route::get('/programhead/students', function () {
-    return view('programhead.pages.student');
- });
+ // show students
+ Route::get('/programhead/students', [StudentController::class, 'showStudents'])->name('programhead_show_students');
+
+
+ // add student
+ Route::post('/programhead/students/create', [StudentController::class, 'createStudent'])->name('programhead_create_student');
+
+ // update student
+ Route::put('/programhead/students/update/{id}', [StudentController::class, 'updateStudent'])->name('programhead_update_student');
+ 
+ // delete student
+ Route::delete('/programhead/students/delete/{id}', [StudentController::class, 'deleteStudent'])->name('programhead_delete_student');
 
 
 
@@ -233,8 +241,15 @@ Route::get('/hr/announcement', function () {
 });
 
 // HR employee *************************************
-Route::get('/hr/employee', function () {
-   return view('hr.pages.employee');
-});
+
+// edit employee
+Route::put('/hr/employee/update/{id}', [HRController::class, 'updateEmployee'])->name('hr_update_employee');
+
+// show employees
+Route::get('/hr/employee', [HRController::class, 'showEmployees'])->name('hr_show_employee');
+
 // create employee
 Route::post('/hr/employee/create', [HRController::class, 'createEmployee'])->name('hr_create_employee');
+
+// delete employee
+Route::delete('/hr/employee/delete/{id}', [HRController::class, 'deleteEmployee'])->name('hr_delete_employee');

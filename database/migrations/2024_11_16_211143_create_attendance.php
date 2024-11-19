@@ -33,7 +33,7 @@ return new class extends Migration
         // employee dtr table
         Schema::create('employee_dtr', function (Blueprint $table) {
             $table->text('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->text('month_year');
             $table->text('day');
             $table->text('time_in');

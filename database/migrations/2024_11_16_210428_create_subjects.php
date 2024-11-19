@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('name');          
             $table->string('description');
             
-            $table->unsignedBigInteger('curriculum_id');
-            $table->foreign('curriculum_id')->references('id')->on('curriculums');
+            $table->unsignedBigInteger('curriculum_id')->nullable();
+            $table->foreign('curriculum_id')->references('id')->on('curriculums')->onDelete('cascade');;
 
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,4 @@ Route::apiResource('course', CourseController::class);
 Route::apiResource('announcements', AnnouncementsController::class);
 Route::apiResource('department', DepartmentController::class);
 Route::apiResource('room', RoomController::class);
+Route::apiResource('subject', SubjectController::class);

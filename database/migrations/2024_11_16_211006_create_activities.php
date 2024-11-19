@@ -22,10 +22,10 @@ return new class extends Migration
             $table->unsignedInteger('max_score');
             
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
 
             $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');;
         });
     }
 

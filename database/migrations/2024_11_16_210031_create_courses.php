@@ -19,11 +19,17 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments');
-
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
+            
+            // $table->unsignedBigInteger('curriculum_id')->nullable();
+            // $table->foreign('curriculum_id')->references('id')->on('curriculums');
 
             $table->timestamps();
         });
+
+        // Schema::table('courses', function (Blueprint $table) {
+
+        // });
     }
 
     /**

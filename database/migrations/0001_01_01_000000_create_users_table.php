@@ -22,7 +22,10 @@ return new class extends Migration
             // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
 
             $table->id();
-            $table->string('name');
+            //$table->string('name');
+            $table->string('surname');
+            $table->string('firstname');
+            $table->string('middlename');
             $table->unsignedInteger('age');
             $table->string('address');
             $table->string('username');

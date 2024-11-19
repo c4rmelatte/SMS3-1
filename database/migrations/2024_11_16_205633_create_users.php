@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user1', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->unsignedInteger('age');
-            $table->string('address');
-            $table->string('username');
-            $table->string('email');
-            $table->string('password');
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles');
-        });
+        // Schema::create('user1', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name');
+        //     $table->unsignedInteger('age');
+        //     $table->string('address');
+        //     $table->string('username');
+        //     $table->string('email');
+        //     $table->string('password');
+        //     $table->unsignedBigInteger('role_id');
+        //     $table->foreign('role_id')->references('id')->on('roles');
+        // });
     }
 
     /**
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+       // Schema::dropIfExists('users');
     }
 };

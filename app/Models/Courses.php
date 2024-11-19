@@ -17,4 +17,9 @@ class Courses extends Model
     {
         return $this->belongsTo(Department::class);
     }
+
+    // public function curriculum()
+    // {
+    //     return $this->belongsTo(Curriculum::class);
+    // }
 }

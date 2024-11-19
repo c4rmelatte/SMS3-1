@@ -1,5 +1,5 @@
 <!-- Modal toggle -->
-<button id="updateProductButton" data-modal-target="updateProductModal-{{ $employee->id }}" data-modal-toggle="updateProductModal-{{ $employee->id }}">
+<button id="updateProductButton" data-modal-target="updateProductModal-{$student->id}" data-modal-toggle="updateProductModal-{$student->id}">
     <svg class="w-6 h-6 text-[#5A8277] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
         height="24" fill="currentColor" viewBox="0 0 24 24">
         <path fill-rule="evenodd"
@@ -11,7 +11,7 @@
     </svg>
 </button>
 
-<div id="updateProductModal-{{ $employee->id }}" tabindex="-1" aria-hidden="true"
+<div id="updateProductModal-{$student->id}" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
@@ -19,7 +19,7 @@
             <!-- Modal header -->
             <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    UPDATE EMPLOYEE
+                    UPDATE STUDENT
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -36,10 +36,14 @@
 
             <!-- Modal body -->
 
-            <form class="p-4 md:p-5" action="{{ route('hr_update_employee', ['id' => $employee->id]) }}" method="POST">
+            
+
+            <!-- Modal body -->
+
+            <form class="p-4 md:p-5" action="{{ route('programhead_update_student', ['id' => $student->id]) }}" method="post">
                 @csrf
-                @method("PUT")
-                <!-- SELECT FIRST NAME -->
+                @method("put")
+                <!-- FIRST NAME -->
                 <div class="grid gap-4 mb-4 grid-cols-4">
                     <div class="col-span-4 sm:col-span-1">
                         <label for="firstName"
@@ -47,76 +51,72 @@
 
                         <input type="text" name="fname" id="fname"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="First Name" required="" value="{{ $employee->firstname }}"/>
+                            placeholder="First Name" required="" value="{{ $student->lastname }}"/>
                     </div>
 
-                    <!-- SELECT MIDDLE NAME -->
+                    <!-- MIDDLE NAME -->
                     <div class="col-span-4 sm:col-span-1">
                         <label for="middleName"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Middle Name</label>
                         <input type="text" name="middleName" id="middleName"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Middle Name" required="" value="{{ $employee->middlename }}"/>
+                            placeholder="Middle Name" required="" value="{{ $student->middlename }}"/>
                     </div>
 
-                    <!-- SELECT SURNAME -->
+                    <!-- SURNAME -->
                     <div class="col-span-4 sm:col-span-1">
                         <label for="surName"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
 
                         <input type="text" name="surName" id="surName"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Surname" required="" value="{{ $employee->surname }}" />
-                    </div>
-
-                    <!-- SELECT CATEGORY -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                        <input type="text" name="employeeCategory" id="employeeCategoryUpdate"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="" required="" value="{{ $employee->category }}" readonly/>
-                    </div>
-
-                    <!-- SELECT POSITION -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
-                        <input type="text" name="employeePosition" id="employeePositionUpdate"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="" required="" value="{{ $employee->position }}" readonly/>
-
+                            placeholder="Surname" required="" value="{{ $student->surname }}"/>
                     </div>
 
                     <!-- DEPARTMENT -->
-                     
-            
-                    <div>
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deparment</label>
-                        <select id="category" name="building_id" value=""
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                    <div class="col-span-4 sm:col-span-2">
+                        <label for="department"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+                        <input type="text" name="department" id="department"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Department" required="" value="CECT" readonly/>
                     </div>
-                    
 
-                    <!-- ACCOUNT NUMBER -->
-                    <div class="col-span-4 sm:col-span-1">
-                        <label for="accountNumber"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account Number</label>
-                        <input type="number" name="accountNumber" id="accountNumber"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Account Number" required="" value="{{ $employee->account_number }}" />
+                    <!-- YEAR LEVEL -->
+                    <div class="col-span-4 sm:col-span-2">
+                        <label for="category"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year Level</label>
+                        <input type="text" name="studentYear" id="studentYear"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="block" required value="{{ $student->year_level }}" readonly/>
+                    </div>
 
+                    <!-- COURSE -->
+                    <div class="col-span-4 sm:col-span-2">
+                        <label for="category"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course</label>
+                        <input type="text" name="studentCourse" id="studentCourse"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="block" required value="{{ $student->course }}" readonly/>
+                    </div>
+
+                     <!-- BLOCK/SECTION -->
+                     <div class="col-span-4 sm:col-span-2">
+                        <label for="category"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Block/Section</label>
+                        <input type="text" name="studentSection" id="studentSection"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="block" required value="{{ $student->block }}" readonly/>
                     </div>
 
                     <!-- age -->
-                    <div class="col-span-4 sm:col-span-1">
+                    <div class="col-span-4 sm:col-span-3">
                         <label for="age"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age:</label>
 
                         <input type="number" name="age" id="age"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Age" required value="{{ $employee->age }}" />
+                            placeholder="Age" required value="{{ $student->age }}" />
                     </div>
 
                     <!-- address -->
@@ -126,7 +126,7 @@
 
                         <input type="text" name="address" id="address"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Address" required value="{{ $employee->address }}"/>
+                            placeholder="Address" required value="{{ $student->address }}"/>
                     </div>
 
                     <!-- username -->
@@ -136,7 +136,7 @@
 
                         <input type="text" name="username" id="username"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Username" required value="{{ $employee->username }}" />
+                            placeholder="Username" required value="{{ $student->username }}"/>
                     </div>
 
                     <!-- email -->
@@ -146,49 +146,12 @@
 
                         <input type="email" name="email" id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Email" required value="{{ $employee->email }}"/>
+                            placeholder="Email" required value="{{ $student->email }}" readonly/>
                     </div>
-
-                    <!-- password -->
-                    <!-- <div class="col-span-4 sm:col-span-4">
-                        <label for="password"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password:</label>
-
-                        <input type="password" name="password" id="password"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Password" required />
-                    </div> -->
-
-                    <!-- time in -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="timeIn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time In:</label>
-
-                        <input type="time" name="timeIn" id="timeIn"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="HH:MM" required />
-                    </div>
-
-                    <!-- time out -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="timeOut" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time
-                            Out:</label>
-
-                        <input type="time" name="timeOut" id="timeOut"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="HH:MM" required />
-                    </div>
-
-                    <!-- rate per hour -->
-                    <div class="col-span-4 sm:col-span-4">
-                        <label for="rate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rate per
-                            Hour:</label>
-
-                        <input type="number" name="rate" id="rate"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="$$$" required />
-                    </div>
-
                 </div>
+
+
+                
                 <div class="flex justify-center">
                     <button type="submit"
                         class="text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
@@ -198,7 +161,7 @@
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        UPDATE EMPLOYEE
+                        UPDATE STUDENT
                     </button>
                 </div>
             </form>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
 
             $table->decimal('final_grade', 8, 2);
             $table->decimal('final_point', 8, 2);
@@ -27,7 +27,7 @@ return new class extends Migration
             
 
             $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');;
 
 
 

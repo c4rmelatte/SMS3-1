@@ -21,10 +21,10 @@ return new class extends Migration
 
             
             $table->unsignedBigInteger('grade_id');
-            $table->foreign('grade_id')->references('id')->on('grades');
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');;
 
             $table->unsignedBigInteger('activity_id');
-            $table->foreign('activity_id')->references('id')->on('activities');
+            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');;
 
 
             $table->timestamps();

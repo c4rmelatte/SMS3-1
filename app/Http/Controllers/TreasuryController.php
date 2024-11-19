@@ -7,7 +7,6 @@ use App\Models\Purpose;
 use App\Models\Announcements;
 use App\Models\Payment;
 use App\Models\TotalFunds;
-
 use Carbon\Carbon;
 
 class TreasuryController extends Controller

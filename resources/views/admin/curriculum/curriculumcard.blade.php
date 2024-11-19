@@ -1,5 +1,6 @@
 @foreach ($curriculums as $curriculum)
 
+
   <div
     class="w-full p-4 flex mb-4 justify-between items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <span>
@@ -11,7 +12,6 @@
     </span>
     <span class="grid grid-cols-3 gap-2">
     @include('admin.curriculum.updatemodal')
-
     <form action="{{route('curriculum.destroy', $curriculum->id)}}" method="POST">
       @csrf
       @method("DELETE")
@@ -31,7 +31,6 @@
       <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
       </svg>
     </a>
-
     </span>
   </div>
 @endforeach

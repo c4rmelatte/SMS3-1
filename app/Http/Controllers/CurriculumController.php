@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Courses;
 use App\Models\Curriculum;
 use Illuminate\Support\Facades\Redirect;
-// use Illuminate\Http\Request;
 
 class CurriculumController extends Controller
 {

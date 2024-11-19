@@ -4,8 +4,8 @@
 
 
     <!-- Login Container -->
-    <div class="w-ful max-w-2xl bg-[#F7F5ED] rounded-2xl shadow dark:border md:mt-0 sm:max-w-xl xl:p-8">
-      <div class="space-y-6 md:space-y-12 sm:m-8">
+    <div class="w-ful max-w-2xl bg-[#F7F5ED] rounded-2xl shadow dark:border md:mt-0 sm:max-w-xl xl:p-10">
+      <div class="space-y-6 md:space-y-12 sm:m-14">
         <!-- Login Title -->
 
         <h1 class="text-xl font-bold leading-tight tracking-tight text-[#3F563B] md:text-2xl text-center">
@@ -40,7 +40,7 @@
                 class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#A0B2A3]" required>
               <label for="remember" class="ml-3 text-sm text-gray-600">Remember me</label>
             </div>
-            <a href="#" class="text-sm text-gray-500 hover:underline pl-60">Forgot password?</a>
+            <a href="#" class="text-sm text-gray-500 hover:underline pl-20">Forgot Password?</a>
           </div>
 
           <!-- Submit Button -->

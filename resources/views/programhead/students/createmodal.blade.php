@@ -1,17 +1,21 @@
 <!-- Modal toggle -->
-<button id="updateProductButton" data-modal-target="updateProductModal-{{ $employee->id }}" data-modal-toggle="updateProductModal-{{ $employee->id }}">
-    <svg class="w-6 h-6 text-[#5A8277] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-        height="24" fill="currentColor" viewBox="0 0 24 24">
-        <path fill-rule="evenodd"
-            d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
-            clip-rule="evenodd" />
-        <path fill-rule="evenodd"
-            d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
-            clip-rule="evenodd" />
-    </svg>
-</button>
+<div class="flex justify-center m-5">
+    <button id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal"
+        class="block flex items-center gap-2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+        type="button">
 
-<div id="updateProductModal-{{ $employee->id }}" tabindex="-1" aria-hidden="true"
+        <svg class="w-5 h-5 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+                d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H6Zm7.25-2.095c.478-.86.75-1.85.75-2.905a5.973 5.973 0 0 0-.75-2.906 4 4 0 1 1 0 5.811ZM15.466 20c.34-.588.535-1.271.535-2v-1a5.978 5.978 0 0 0-1.528-4H18a4 4 0 0 1 4 4v1a2 2 0 0 1-2 2h-4.535Z"
+                clip-rule="evenodd" />
+        </svg>
+        ADD STUDENT
+    </button>
+</div>
+
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
@@ -19,11 +23,11 @@
             <!-- Modal header -->
             <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    UPDATE EMPLOYEE
+                    ADD STUDENT
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                    data-modal-toggle="updateProductModal">
+                    data-modal-toggle="defaultModal">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -36,10 +40,9 @@
 
             <!-- Modal body -->
 
-            <form class="p-4 md:p-5" action="{{ route('hr_update_employee', ['id' => $employee->id]) }}" method="POST">
+            <form class="p-4 md:p-5" action="{{ route('programhead_create_student') }}" method="post">
                 @csrf
-                @method("PUT")
-                <!-- SELECT FIRST NAME -->
+                <!-- FIRST NAME -->
                 <div class="grid gap-4 mb-4 grid-cols-4">
                     <div class="col-span-4 sm:col-span-1">
                         <label for="firstName"
@@ -47,76 +50,81 @@
 
                         <input type="text" name="fname" id="fname"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="First Name" required="" value="{{ $employee->firstname }}"/>
+                            placeholder="First Name" required="" />
                     </div>
 
-                    <!-- SELECT MIDDLE NAME -->
+                    <!-- MIDDLE NAME -->
                     <div class="col-span-4 sm:col-span-1">
                         <label for="middleName"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Middle Name</label>
                         <input type="text" name="middleName" id="middleName"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Middle Name" required="" value="{{ $employee->middlename }}"/>
+                            placeholder="Middle Name" required="" />
                     </div>
 
-                    <!-- SELECT SURNAME -->
+                    <!-- SURNAME -->
                     <div class="col-span-4 sm:col-span-1">
                         <label for="surName"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
 
                         <input type="text" name="surName" id="surName"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Surname" required="" value="{{ $employee->surname }}" />
-                    </div>
-
-                    <!-- SELECT CATEGORY -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                        <input type="text" name="employeeCategory" id="employeeCategoryUpdate"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="" required="" value="{{ $employee->category }}" readonly/>
-                    </div>
-
-                    <!-- SELECT POSITION -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
-                        <input type="text" name="employeePosition" id="employeePositionUpdate"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="" required="" value="{{ $employee->position }}" readonly/>
-
+                            placeholder="Surname" required="" />
                     </div>
 
                     <!-- DEPARTMENT -->
-                     
-            
-                    <div>
+                    <div class="col-span-4 sm:col-span-2">
+                        <label for="department"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+                        <input type="text" name="department" id="department"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Department" required="" value="CECT" readonly/>
+                    </div>
+
+                    <!-- YEAR LEVEL -->
+                    <div class="col-span-4 sm:col-span-2">
                         <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deparment</label>
-                        <select id="category" name="building_id" value=""
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year Level</label>
+                        <select name="studentYear" id="studentYear"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option selected="">Select Year Level</option>
+                            <option value="3">Third Year</option>
+                        </select>
                     </div>
-                    
 
-                    <!-- ACCOUNT NUMBER -->
-                    <div class="col-span-4 sm:col-span-1">
-                        <label for="accountNumber"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account Number</label>
-                        <input type="number" name="accountNumber" id="accountNumber"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Account Number" required="" value="{{ $employee->account_number }}" />
+                    <!-- COURSE -->
+                    <div class="col-span-4 sm:col-span-2">
+                        <label for="category"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course</label>
 
+                        <select name="studentCourse" id="studentCourse"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option selected="">Select Course</option>
+                            <option value="BSIT">BSIT</option>
+                        </select>
                     </div>
+
+                     <!-- BLOCK/SECTION -->
+                     <div class="col-span-4 sm:col-span-2">
+                        <label for="category"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Block/Section</label>
+
+                        <select name="studentSection" id="studentSection"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option selected="">Select Block/Section</option>
+                            <option value="1">Block 1</option>
+                        </select>
+                    </div>
+
 
                     <!-- age -->
-                    <div class="col-span-4 sm:col-span-1">
+                    <div class="col-span-4 sm:col-span-3">
                         <label for="age"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age:</label>
 
                         <input type="number" name="age" id="age"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Age" required value="{{ $employee->age }}" />
+                            placeholder="Age" required value="" />
                     </div>
 
                     <!-- address -->
@@ -126,7 +134,7 @@
 
                         <input type="text" name="address" id="address"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Address" required value="{{ $employee->address }}"/>
+                            placeholder="Address" required />
                     </div>
 
                     <!-- username -->
@@ -136,7 +144,7 @@
 
                         <input type="text" name="username" id="username"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Username" required value="{{ $employee->username }}" />
+                            placeholder="Username" required />
                     </div>
 
                     <!-- email -->
@@ -146,49 +154,20 @@
 
                         <input type="email" name="email" id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Email" required value="{{ $employee->email }}"/>
+                            placeholder="Email" required />
                     </div>
 
                     <!-- password -->
-                    <!-- <div class="col-span-4 sm:col-span-4">
+                    <div class="col-span-4 sm:col-span-4">
                         <label for="password"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password:</label>
 
                         <input type="password" name="password" id="password"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Password" required />
-                    </div> -->
-
-                    <!-- time in -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="timeIn" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time In:</label>
-
-                        <input type="time" name="timeIn" id="timeIn"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="HH:MM" required />
                     </div>
-
-                    <!-- time out -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="timeOut" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time
-                            Out:</label>
-
-                        <input type="time" name="timeOut" id="timeOut"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="HH:MM" required />
-                    </div>
-
-                    <!-- rate per hour -->
-                    <div class="col-span-4 sm:col-span-4">
-                        <label for="rate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rate per
-                            Hour:</label>
-
-                        <input type="number" name="rate" id="rate"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="$$$" required />
-                    </div>
-
                 </div>
+
                 <div class="flex justify-center">
                     <button type="submit"
                         class="text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
@@ -198,10 +177,11 @@
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        UPDATE EMPLOYEE
+                        ADD STUDENT
                     </button>
                 </div>
             </form>
         </div>
     </div>
+
 </div>

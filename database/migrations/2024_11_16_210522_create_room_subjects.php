@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('room_id');
-            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');;
             $table->unsignedBigInteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');;
             $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('users');
+            $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');;
             $table->timestamps();
         });
     }

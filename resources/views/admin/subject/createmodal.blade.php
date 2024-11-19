@@ -4,13 +4,12 @@
         class="block flex items-center gap-2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
         type="button">
 
-        <svg class="w-5 h-5 text-text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd"
-                d="M10.915 2.345a2 2 0 0 1 2.17 0l7 4.52A2 2 0 0 1 21 8.544V9.5a1.5 1.5 0 0 1-1.5 1.5H19v6h1a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2h1v-6h-.5A1.5 1.5 0 0 1 3 9.5v-.955a2 2 0 0 1 .915-1.68l7-4.52ZM17 17v-6h-2v6h2Zm-6-6h2v6h-2v-6Zm-2 6v-6H7v6h2Z"
-                clip-rule="evenodd" />
-            <path d="M2 21a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1Z" />
-        </svg> CREATE DEPARTMENT
+        <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd"
+                     d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z"
+                     clip-rule="evenodd" />
+               </svg> CREATE SUBJECT
     </button>
 </div>
 
@@ -23,7 +22,7 @@
             <!-- Modal header -->
             <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    ADD DEPARTMENT
+                    ADD SUBJECT
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -38,33 +37,45 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="" method="POST">
+            <form action="{{route('subject.store')}}" method="POST">
                 @csrf
-                <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                
+            <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                    <div>
+                        <label for="code"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject Name</label>
+                        <input type="text" name="code" id="code" value=""
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            placeholder="Type subject code" required="">
+                    </div>
+
                     <div>
                         <label for="name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department Name</label>
-                        <input type="text" name="name" id="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject Code</label>
+                        <input type="text" name="name" id="name" value=""
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Type department name" required="">
+                            placeholder="Type subject name" required="">
                     </div>
+
                     <div>
                         <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Building</label>
-                        <select id="category" name="building_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Curriculum</label>
+                        <select id="category" name="curriculum_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-
-                            <!-- for each -->
-
-
+                            
+                                <option value="College">WUP-310</option>
+                        
+                                </option>
+                           
                         </select>
+
                     </div>
                     <div class="sm:col-span-2">
                         <label for="description"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <input type="text" name="description" id="description" rows="4"
+                        <input type="text" name="description" value="" id="description"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Write description about department"></>
+                            placeholder="Write course description here"></>
                     </div>
                 </div>
                 <button type="submit"
@@ -75,7 +86,7 @@
                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                             clip-rule="evenodd"></path>
                     </svg>
-                    ADD DEPARTMENT
+                    ADD subject
                 </button>
             </form>
         </div>

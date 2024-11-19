@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->unsignedBigInteger('building_id');
-            $table->foreign('building_id')->references('id')->on('buildings');
+            $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');;
             $table->timestamps();
         });
     }
