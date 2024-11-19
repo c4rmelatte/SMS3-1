@@ -38,41 +38,23 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="#">
-                <div class="grid gap-4 mb-4 sm:grid-cols-2">
+            <form action="{{route('building.store')}}" method="POST">
+                @csrf
+                <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
-                        <label for="name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Announcement
-                            Title</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Building
+                            Name</label>
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Type building title" required="">
+                            placeholder="Type building name" required="">
                     </div>
-                    <div>
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
-                            Department</label>
-                        <select id="category"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-                            <option value="TV">DEPARMENT</option>
-                            <option value="CON">CON</option>
-                            <option value="CON">CHTM</option>
-                            <option value="CAMS">CAMS</option>
-                            <option value="CECT">CECT</option>
-                            <option value="CBA">CBA</option>
-                            <option value="CCJE">CCJE</option>
-                            <option value="COED">COED</option>
-                            <option value="CAS">CAS</option>
-                            <option value="SHS">SHS</option>
-                            <option value="BED">BED</option>
-                        </select>
-                    </div>
-                    <div class="sm:col-span-3">
+
+                    <div class="">
                         <label for="description"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea id="description" rows="4"
+                        <input type="text" name="description" id="description" rows="4"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Write building description here"></textarea>
+                            placeholder="Write building description here" required="">
                     </div>
                 </div>
                 <button type="submit"

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\announcements;
 use App\Http\Requests\StoreannouncementsRequest;
-use App\Http\Requests\UpdateannouncementsRequest;
+use Illuminate\Http\Request;
 
 class AnnouncementsController extends Controller
 {
@@ -27,7 +27,7 @@ class AnnouncementsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreannouncementsRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,7 +51,7 @@ class AnnouncementsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateannouncementsRequest $request, announcements $announcements)
+    public function update(Request $request, announcements $announcements)
     {
         //
     }

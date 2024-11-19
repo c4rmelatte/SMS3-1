@@ -12,13 +12,34 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            // $table->id();
+            // $table->string('name');
+            // $table->string('email')->unique();
+            // $table->timestamp('email_verified_at')->nullable();
+            // $table->string('password');
+
+            // $table->unsignedBigInteger('role_id'); // remove later
+            // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->unsignedInteger('age');
+            $table->string('address');
+            $table->string('username');
+            $table->string('email');
             $table->string('password');
+            $table->string('department');
+            $table->string('category');
+            $table->string('position');
+            $table->integer('account_number');
+
             $table->rememberToken();
             $table->timestamps();
+            // pre-created to ng system
+
+            /*AFK ZONE: tambayan ng walang ginagawa
+                
+            */
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

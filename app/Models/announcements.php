@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class announcements extends Model
 {
+    protected $table = 'announcements';
     /** @use HasFactory<\Database\Factories\AnnouncementsFactory> */
     use HasFactory;
 }

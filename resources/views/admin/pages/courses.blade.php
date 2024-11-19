@@ -2,8 +2,9 @@
 @section('content')
 <div class="p-4 sm:ml-64">
    <div class="p-4  dark:border-gray-700">
-      <div class="flex w-full items-center justify-between">
+      <div class="flex w-full items-center mb-3 justify-between">
          <h1 class="text-3xl text-[#37584F] font-bold">Courses</h1>
+         @include('admin.courses.createmodal')
       </div>
       <hr class="w-full mb-4">
 

@@ -5,11 +5,13 @@
    <div class="p-4  dark:border-gray-700">
       <div class="flex w-full items-center justify-between">
          <h1 class="text-3xl text-[#37584F] font-bold">Curriculum</h1>
+         @include('admin.curriculum.createmodal')
       </div>
       <hr class="w-full mb-4">
 
       <div class="w-full">
          @include('admin.curriculum.curriculumcard')
+         
       </div>
    </div>
 </div>
