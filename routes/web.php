@@ -60,7 +60,7 @@ Route::get('/admin/departments', function () {
    return view('admin.pages.department')->with(['buildings' => $buildings, 'departments' => $departments]);
 });
 
-Route::get('/admin/departments/{deparments}', [DepartmentController::class, 'showCourses'])->name('show_course');
+Route::get('/admin/departments/{department}', [DepartmentController::class, 'showCourses'])->name('show_course');
 
 //************ Subjects
 

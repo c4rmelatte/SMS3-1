@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-    
+
     public function index()
     {
 
@@ -23,15 +23,16 @@ class DepartmentController extends Controller
 
     }
 
-    public function destroy(Department $department) 
+    public function destroy(Department $department)
     {
-        $department -> delete();
+        $department->delete();
         return Redirect::to('/admin/departments');
     }
 
 
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         $departments = new Department();
         $departments->name = $request->get('name');
@@ -47,22 +48,33 @@ class DepartmentController extends Controller
     {
         // Find the department by its ID
         $department = Department::findOrFail($id);
-    
+
         // Update department with the new data
         $department->update([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
             'building_id' => $request->get('building_id'),
         ]);
-    
+
         // Redirect to the departments list or other relevant page
         return Redirect::to('/admin/departments');
     }
 
-    public function showCourses(Courses $course, Department $department){
-        $department = Department::findOrFail($department->id);
+    public function showCourses(Courses $course, Department $department)
+    {
+
+        $departments = Department::findOrFail($department->id);
+
+        $courses = Courses::where('department_id', $department->id)
+            ->latest()
+            ->get('name'); //pre uuwi muna ako HAHHAHAH
+
+        $count = Courses::where('department_id', $department->id)
+            ->count(); //check lang kung may naadd kana ba na course sa dept or wala pa
 
         return view('admin.department.components.showcourses')
-            ->with('depart', $department);
+            ->with('departments', $departments)
+            ->with('count', $count)
+            ->with('courses', $courses);
     }
-}
+} 
