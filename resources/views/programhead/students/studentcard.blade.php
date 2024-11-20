@@ -10,7 +10,7 @@
    <span class="flex flex-col">
     @include('programhead.students.updatemodal', ['student' => $student])
 
-    <form action="{{  }}" method="post">
+    <form action="{{ route('programhead_delete_student', ['id' => $student->id]) }}" method="post">
     @csrf
     @method("delete")
       

@@ -16,15 +16,10 @@ return new class extends Migration
             $table->string("title");
             $table->longText("description");
             $table->string("target");
-            
             $table->timestamps();
-
         });
     }
     
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('announcements');

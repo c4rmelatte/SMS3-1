@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Building;
 use App\Models\Department;
+use App\Models\Courses;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 
@@ -56,5 +57,12 @@ class DepartmentController extends Controller
     
         // Redirect to the departments list or other relevant page
         return Redirect::to('/admin/departments');
+    }
+
+    public function showCourses(Courses $course, Department $department){
+        $department = Department::findOrFail($department->id);
+
+        return view('admin.department.components.showcourses')
+            ->with('depart', $department);
     }
 }

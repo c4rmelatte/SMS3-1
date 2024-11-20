@@ -8,7 +8,7 @@
       </div>
       <hr class="w-full mb-3">
 
-      <div class="w-full flex">
+      <div class="w-full">
          @include('hr.employee.employeecard')
       </div>
    </div>

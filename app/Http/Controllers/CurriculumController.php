@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Courses;
+use App\Models\Subject;
 use App\Models\Curriculum;
 use Illuminate\Support\Facades\Redirect;
 
@@ -36,8 +37,13 @@ class CurriculumController extends Controller
     public function showCourses(Courses $courses, Curriculum $curriculum)
     {
         $curriculums = Curriculum::findOrFail($curriculum->id);
-        $courses = Courses::where('id', $curriculums->course_id)->orderByDesc('id')->get();
-        return view('admin.curriculum.components.viewcurriculum')->with(['courses' => $courses, 'curriculums' => $curriculums]);
+        $courses = Courses::where('id', $curriculums->course_id)->get('name');
+        $subjects = Subject::where('curriculum_id', $curriculum->id)->latest()->get();
+        return view('admin.curriculum.components.viewcurriculum')->with(
+            [ 'courses' => $courses, 
+              'curriculums' => $curriculums,
+              'subjects' => $subjects,
+        ]);
     }
 
     public function update(Request $request, $id)

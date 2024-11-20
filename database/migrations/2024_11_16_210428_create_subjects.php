@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->string('name');          
-            $table->string('description');
+            $table->string('name');     
+            $table->string('description')->nullable();
             
-            $table->unsignedBigInteger('curriculum_id')->nullable();
+            $table->unsignedBigInteger('curriculum_id')->nullable(false);
             $table->foreign('curriculum_id')->references('id')->on('curriculums')->onDelete('cascade');;
 
             $table->timestamps();

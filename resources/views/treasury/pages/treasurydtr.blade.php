@@ -1,13 +1,17 @@
 @extends('treasury.treasuryindex')
-
+<!-- main treasury dash -->
 @section('content')
 
 <style>
     body {
         margin: 0;
-        padding: 20px;
+        padding: 0;
         font-family: "Poppins", sans-serif;
-        background: #f2f3ed;
+        background: #fff;
+    }
+
+    #dtrContainer {
+        margin: 25px 50px 0 300px;
     }
 
     .name-line {
@@ -54,7 +58,8 @@
         background-color: #e0e0e0;
     }
 
-    .date-picker select, .date-picker button {
+    .date-picker select,
+    .date-picker button {
         padding: 5px 10px;
         font-weight: bold;
         color: #333;
@@ -63,30 +68,30 @@
         border-radius: 5px;
     }
 
-    .date{
-      background-color: #e0e0e0;
-      border-radius: 5px;
-      border: solid 1px gray;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    .date {
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        border: solid 1px gray;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .btn-submit {
-      background-color: #2f725f !important;
-      color: #e0e0e0 !important;
-      width: 80px;
-      padding: 8px 20px;
-      font-weight: bold;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
+        background-color: #2f725f !important;
+        color: #e0e0e0 !important;
+        width: 80px;
+        padding: 8px 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
 
     .btn-print {
-      background-color: #F1CA57 !important;
-      color: white !important;
+        background-color: #F1CA57 !important;
+        color: white !important;
         width: 80px;
         padding: 8px 10px;
         font-weight: bold;
@@ -99,13 +104,13 @@
     }
 
     .date-picker {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: space-between;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        justify-content: space-between;
 
-        }
+    }
 
     table {
         width: 100%;
@@ -129,39 +134,42 @@
         border: 1px solid #ccc;
     }
 
-    tbody td:nth-child(3),
-    tbody td:nth-child(5),
+    tbody td:nth-child(1),
     tbody td:nth-child(7) {
-        color: #666;
+        color: black;
         font-weight: bold;
     }
 
     tbody tr:hover {
         background-color: #e9e9e9;
     }
+
+    #salaryPeriodLabel {
+        font-weight: bold;
+    }
 </style>
 
-<div>
+<div id="dtrContainer">
 
     <!-- info & print -->
-     <div>Salary Period:</div>
+    <div id="salaryPeriodLabel">Salary Period:</div>
     <div class="date-picker">
-    @if($employee->isEmpty())
-        <div>no employee dtr data.</div>
-    @else
-        <form id="dropdownForm" action="{{ route('show.dateDTR') }}" method="get">
-            <select id="dropdown" name="selected_date" onchange="submitForm()">
-                <option disabled selected>Select a date</option>
-                @foreach($monthYears as $monthYear)
+        @if($employee->isEmpty())
+            <div>no employee dtr data.</div>
+        @else
+            <form id="dropdownForm" action="{{ route('show.dateDTR') }}" method="get">
+                <select id="dropdown" name="selected_date" onchange="submitForm()">
+                    <option disabled selected>Select a date</option>
+                    @foreach($monthYears as $monthYear)
 
-                    <option>{{ $monthYear }}</option>
+                        <option>{{ $monthYear }}</option>
 
-                @endforeach
-            </select>
-            <input type="hidden" name="employeeID" value="{{ $id }}">
-        </form>
-    @endif
-    <button class="btn-print" id="print" onclick="window.print()">PRINT</button>
+                    @endforeach
+                </select>
+                <input type="hidden" name="employeeID" value="{{ $id }}">
+            </form>
+        @endif
+        <button class="btn-print" id="print" onclick="window.print()">PRINT</button>
     </div>
 
     <!-- table -->
@@ -181,8 +189,8 @@
                     <th>OVERTIME</th>
                     <th>HOURS WORKED</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 @foreach($employee as $dtr)
 
                     <tr>
@@ -196,11 +204,11 @@
                     </tr>
 
                 @endforeach
-                </tbody>
+            </tbody>
 
-            </table>
+        </table>
 
-        @endif
+    @endif
 
     <!-- SCRIPT -->
     <script>
@@ -220,4 +228,5 @@
     </script>
 
 </div>
+
 @endsection

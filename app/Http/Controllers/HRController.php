@@ -13,7 +13,7 @@ class HRController extends Controller
     public function showEmployees() {
 
         // find employees
-        $employees = DB::table('users')->where('role', '!=', 'students')->get();
+        $employees = DB::table('users')->where('position', '!=', 'students')->get();
 
         return view('hr.pages.employee', ['employees' => $employees]);
     }
@@ -27,19 +27,11 @@ class HRController extends Controller
         $age = $request->input('age');
         $address = $request->input('address');
         $username = $request->input('username');
-        $email = $request->input('email');
         $accountNumber = $request->input('accountNumber');
 
         $timeIn = $request->input('timeIn');
         $timeOut = $request->input('timeOut');
         $rate = $request->input('rate');
-
-        $existingEmail = DB::table('users')->where('email', $email)->first();
-
-        if ($existingEmail) {
-            // placeholder
-            return "email already existing";
-        }
 
         // update the employee
         DB::table('users')->where('id', $id)->update([
@@ -50,7 +42,6 @@ class HRController extends Controller
             'age' => $age,
             'address' => $address,
             'username' => $username,
-            'email' => $email,
             'account_number' => $accountNumber
 
         ]);
@@ -105,7 +96,7 @@ class HRController extends Controller
         $username = $request->input('username');
         $email = $request->input('email');
         $password = $request->input('password');
-        $department = 'to be coded';
+        $department = 'CECT';
         $accountNumber = $request->input('accountNumber');
 
         $timeIn = $request->input('timeIn');

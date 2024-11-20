@@ -14,6 +14,7 @@ class purpose extends Model
     //treasury purpose(ID,UNif, etc.)
     protected $fillable = [
         'name',
-        'price'
+        'price',
+        'type'
     ];
 }

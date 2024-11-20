@@ -1,6 +1,6 @@
 <!-- Modal toggle -->
 <button id="updateProductButton" data-modal-target="{{$subject->id}}-updateProductModal"
-    data-modal-toggle="-updateProductModal">
+    data-modal-toggle="{{$subject->id}}-updateProductModal">
     <svg class="w-6 h-6 text-[#5A8277] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
         height="24" fill="currentColor" viewBox="0 0 24 24">
         <path fill-rule="evenodd"
@@ -25,7 +25,7 @@
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                    data-modal-toggle="-updateProductModal">
+                    data-modal-toggle="{{$subject->id}}-updateProductModal">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -49,11 +49,11 @@
                     </div>
 
                     <div>
-                        <label for="name"
+                        <label for="code"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject Code</label>
-                        <input type="text" name="name" id="name" value="{{$subject->code}}"
+                        <input type="text" name="code" id="code" value="{{$subject->code}}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Type subject name" required="">
+                            placeholder="Type subject code" required="">
                     </div>
 
                     <div>
@@ -62,9 +62,9 @@
                         <select id="category" name="curriculum_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                             
-                                <option value="College">WUP-310</option>
-                        
-                                </option>
+                            @foreach ($curriculums as $curriculum)
+                                <option value="{{ $curriculum->id }}">{{ $curriculum->name }}</option>
+                            @endforeach
                            
                         </select>
 
@@ -74,7 +74,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                         <input type="text" name="description" value="{{$subject->description}}" id="description"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Write course description here"></>
+                            placeholder="Write subject description here"></>
                     </div>
                 </div>
                 <button type="submit"

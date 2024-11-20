@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\TreasuryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\DTRController;
@@ -29,9 +30,7 @@ Route::get('/', function(){
 
 // ADMIN *************************************************************************************
 
-Route::get('/admin', function () {
-    return view('index');
-})->name('admin');
+Route::get('/admin',[AdminController::class, 'showStats'])->name('admin');
 
 Route::get('/admin/announcement', function () {
     return view('admin.pages.announcement');
@@ -61,6 +60,8 @@ Route::get('/admin/departments', function () {
    return view('admin.pages.department')->with(['buildings' => $buildings, 'departments' => $departments]);
 });
 
+Route::get('/admin/departments/{deparments}', [DepartmentController::class, 'showCourses'])->name('show_course');
+
 //************ Subjects
 
 Route::get('/admin/subject',[SubjectController::class, 'index']);
@@ -69,7 +70,7 @@ Route::get('/admin/subject',[SubjectController::class, 'index']);
 
 Route::get('/student', function () {
    return view('student.studentindex');
-});
+})->name('student');
 
 Route::get('/student/announcements', function () {
    return view('student.pages.announcement');
@@ -102,7 +103,7 @@ Route::get('/treasury', function () {
     
     // nawawala yung products dito ata kaya di nagloload 
 
- });
+ })->name('treasuryView');
 
  Route::get('/treasury/announcement', function () {
     return view('treasury.pages.announcement');
@@ -121,9 +122,13 @@ Route::get('/treasury', function () {
    Route::put('/treasury/update/purpose/{id}', [TreasuryController::class, 'updatePurpose'])->name('update_purpose');
    Route::delete('/treasury/delete/purpose/{id}', [TreasuryController::class, 'deletePurpose'])->name('delete_purpose');
 
- Route::get('/treasury/payment', function () {
-    return view('treasury.treasuryindex');
- });
+Route::get('/treasury/payment', function () {
+   return view('treasury.treasuryindex');
+});
+
+// treasury dtr
+Route::get('/treasury/dtr/{userID}/showDTR', [DTRController::class, 'getDTR'])->name('tresury.show.dtr');
+Route::get('/treasury/dtr/getDateDTR', [DTRController::class, 'getDateDTR'])->name('tresury.show.dateDTR');
 
  
 
@@ -212,7 +217,7 @@ Route::get('/dtr/input', function () {
 Route::get('/dtr/input/check', [DTRController::class, 'checkRole'])->name('check.id');
 Route::post('/dtr/input/logTime', [DTRController::class, 'logTime'])->name('input.time');
 // show dtr table of employee
-Route::get('/dtr/input/{id}/showDTR', [DTRController::class, 'getDTR'])->name('show.time');
+Route::get('/dtr/input/{userID}/showDTR', [DTRController::class, 'getDTR'])->name('show.dtr');
 Route::get('/dtr/input/getDateDTR', [DTRController::class, 'getDateDTR'])->name('show.dateDTR');
 
 
@@ -222,10 +227,11 @@ Route::get('/dtr/input/getDateDTR', [DTRController::class, 'getDateDTR'])->name(
 
 Route::get('/login', function () {
    return view('login.loginindex');
-});
+})->name('login');
 
 // login function with authentication
 Route::get('/login/find', [LoginController::class, 'loginUser'])->name('login_user');
+Route::get('/logout', [LoginController::class, 'logoutUser'])->name('logout_user');
 
 
 
@@ -253,3 +259,6 @@ Route::post('/hr/employee/create', [HRController::class, 'createEmployee'])->nam
 
 // delete employee
 Route::delete('/hr/employee/delete/{id}', [HRController::class, 'deleteEmployee'])->name('hr_delete_employee');
+
+// ENROLLMENT ********************************************************************************************
+

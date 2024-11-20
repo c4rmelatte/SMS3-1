@@ -10,6 +10,13 @@ class Subject extends Model
     protected $fillable = [
         'code',
         'name',
+        'curriculum_id',
         'description'
+
     ];
+
+    public function subject()
+    {
+        return $this->belongsTo(Curriculum::class);
+    }
 }

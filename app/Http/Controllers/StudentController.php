@@ -95,21 +95,50 @@ class StudentController extends Controller
     }
 
     // update students
-    public function updateStudents(Request $request, $id) {
+    public function updateStudent(Request $request, $id) {
 
-        // find students
-        $students = DB::table('users')->where('category', 'students')->get();
+        $firstName = $request->input('fname');
+        $middleName = $request->input('middleName');
+        $surname = $request->input('surName');
+        $age = $request->input('age');
+        $address = $request->input('address');
+        $username = $request->input('username');
+
+        $yearlevel = $request->input('studentYear');
+        $course = $request->input('studentCourse');
+        $block = $request->input('studentSection');
+
+        // update the student
+        DB::table('users')->where('id', $id)->update([
+
+            'surname' => $surname,
+            'firstname' => $firstName,
+            'middlename' => $middleName,
+            'age' => $age,
+            'address' => $address,
+            'username' => $username
+
+        ]);
+
+        // student info
+        DB::table('students')->where('user_id', $id)->update([
+
+            'course' => $course,
+            'year_level' => $yearlevel,
+            'block' => $block
+
+        ]);
 
         return redirect()->back();
     }
 
     // delte students
-    public function deleteStudents($id) {
+    public function deleteStudent($id) {
 
-        // find students
-        $students = DB::table('users')->where('category', 'students')->get();
+        // delete the student
+        DB::table('users')->where('id', $id)->delete();
 
-        return view('programhead.pages.student', ['students' => $students]);
+        return redirect()->back();
     }
 }
 

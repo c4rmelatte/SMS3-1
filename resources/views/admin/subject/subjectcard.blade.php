@@ -1,13 +1,16 @@
 @foreach ($subjects as $subject)
-<div
+  <div
     class="w-full p-4 flex mb-4 justify-between items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <span>
     <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white hover:text-[#37584F]">
-     {{$subject->name}} </h5>
+      {{$subject->name}} | Curriculum: {{$curriculums->firstWhere('id', $subject->curriculum_id)->name}}
+    </h5>
+    <!-- {{-- {{$subject->curriculum ? $subject->curriculum->name : $curriculum_id}} --}} -->
     <p class="text-sm text-gray-600 dark:text-gray-400">
       {{$subject->code}}
       <br>
       {{$subject->description}}
+      <br>
     </p>
     </span>
 

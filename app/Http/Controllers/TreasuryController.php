@@ -71,7 +71,6 @@ class TreasuryController extends Controller
         return redirect()->to('/treasury')->with('success', 'Product deleted successfully.');
     }
 
-
     //**********************PAYMENT**************************
   
 }

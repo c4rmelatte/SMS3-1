@@ -31,7 +31,7 @@ class DTRController extends Controller // OFFLINE MODIFIED
         $currentDateCheck = $request->input('currentDateCheck');
 
         // find employee
-        $employee = DB::table('users')->where('role', '!=', 'student')->where('id', $idInput)->first();
+        $employee = DB::table('users')->where('position', '!=', 'students')->where('id', $idInput)->first();
 
         if ($employee) {
 
@@ -44,9 +44,11 @@ class DTRController extends Controller // OFFLINE MODIFIED
             } else {
                 $timeInOut = 'TIME OUT';
             }
+            
+            $employeeFullname = "{$employee->surname}, {$employee->firstname} {$employee->middlename}";
 
             return redirect()->back()->with([
-                'name' => $employee->name,
+                'name' => $employeeFullname,
                 'idInput' => $idInput,
                 'timeInOut' => $timeInOut
             ]);
@@ -184,11 +186,16 @@ class DTRController extends Controller // OFFLINE MODIFIED
     }
 
     // get dtr data of the employee and display it // MODIFIED
-    public function getDTR(Request $request)
+    public function getDTR(Request $request, $userID)
     {
 
         // TO BE CHANGED
-        $id = '22-2222-222';
+        //$id = '22-2222-222';
+        $id = $userID;
+
+        $employeePosition = DB::table('users')->where('id', $id)->first();
+
+        $position = $employeePosition->position;
 
         $currentDate = $request->input('currentDate');
         $monthYear = Carbon::parse($currentDate)->format('M Y');
@@ -196,12 +203,35 @@ class DTRController extends Controller // OFFLINE MODIFIED
         $employee = DB::table('employee_dtr')->where('user_id', $id)->where('month_year', $monthYear)->get();
         $monthYears = DB::table('employee_dtr')->where('user_id', $id)->distinct()->pluck('month_year');
 
-        return view('pages/dtr_show', [
-            'employee' => $employee,
-            'monthYears' => $monthYears,
-            'id' => $id,
-            'monthYearDisplay' => $monthYear
-        ]);
+        if ($position == 'students') {
+            return redirect()->route('student');
+
+        } elseif ($position == 'program_head') {
+            return redirect()->route('programhead');
+
+        } elseif ($position == 'professors') {
+            // return view of professor
+
+        } elseif ($position == 'hr') {
+            // return view of hr
+
+        } elseif ($position == 'admin') {
+            // return view of admin
+
+            return redirect()->route('admin');
+        } elseif ($position == 'treasury') { // TREASURY VIEW DTR **********************************************************
+
+            return view('treasury/pages/treasurydtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]);
+
+        } elseif ($position == 'registrar') {
+            // return view of registrar
+
+        }
 
     }
 
@@ -214,15 +244,42 @@ class DTRController extends Controller // OFFLINE MODIFIED
         // TO BE CHANGED
         $id = $request->input('employeeID');
 
+        $employeePosition = DB::table('users')->where('id', $id)->first();
+
+        $position = $employeePosition->position;
+
         $employee = DB::table('employee_dtr')->where('user_id', $id)->where('month_year', $monthYear)->get();
         $monthYears = DB::table('employee_dtr')->where('user_id', $id)->distinct()->pluck('month_year');
 
-        return view('pages/dtr_show', [
-            'employee' => $employee,
-            'monthYears' => $monthYears,
-            'id' => $id,
-            'monthYearDisplay' => $monthYear
-        ]);
+        if ($position == 'students') {
+            return redirect()->route('student');
+
+        } elseif ($position == 'program_head') {
+            return redirect()->route('programhead');
+
+        } elseif ($position == 'professors') {
+            // return view of professor
+
+        } elseif ($position == 'hr') {
+            // return view of hr
+
+        } elseif ($position == 'admin') {
+            // return view of admin
+
+            return redirect()->route('admin');
+        } elseif ($position == 'treasury') { // TREASURY VIEW DTR **********************************************************
+
+            return view('treasury/pages/treasurydtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]);
+
+        } elseif ($position == 'registrar') {
+            // return view of registrar
+
+        }
 
     }
 

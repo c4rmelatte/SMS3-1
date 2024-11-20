@@ -18,7 +18,7 @@ class Curriculum extends Model
         return $this->belongsTo(Courses::class);
     }
 
-    //kupal si michael
+
     // public function courses()
     // {
     //     return $this->hasMany(Courses::class, 'curriculum_id');
