@@ -1,11 +1,16 @@
-
+@extends('index')
+@section('content')
 
 <style>
     body {
         margin: 0;
-        padding: 20px;
+        padding: 0;
         font-family: "Poppins", sans-serif;
-        background: #f2f3ed;
+        background: #fff;
+    }
+
+    #dtrContainer {
+        margin: 25px 50px 0 300px;
     }
 
     .name-line {
@@ -128,26 +133,30 @@
         border: 1px solid #ccc;
     }
 
-    tbody td:nth-child(3),
-    tbody td:nth-child(5),
+    tbody td:nth-child(1),
     tbody td:nth-child(7) {
-        color: #666;
+        color: black;
         font-weight: bold;
     }
 
     tbody tr:hover {
         background-color: #e9e9e9;
     }
+
+    #salaryPeriodLabel {
+        font-weight: bold;
+    }
 </style>
 
-<div>
+<div id="dtrContainer">
+
+@if($employee->isEmpty())
+    <p style="font-weight:bold; font-size: 20px">no employee dtr data.</p>
+@else
 
     <!-- info & print -->
-    <div>Salary Period:</div>
+    <div id="salaryPeriodLabel">Salary Period:</div>
     <div class="date-picker">
-        @if($employee->isEmpty())
-            <div>no employee dtr data.</div>
-        @else
             <form id="dropdownForm" action="{{ route('show.dateDTR') }}" method="get">
                 <select id="dropdown" name="selected_date" onchange="submitForm()">
                     <option disabled selected>Select a date</option>
@@ -159,15 +168,10 @@
                 </select>
                 <input type="hidden" name="employeeID" value="{{ $id }}">
             </form>
-        @endif
         <button class="btn-print" id="print" onclick="window.print()">PRINT</button>
     </div>
 
     <!-- table -->
-
-    @if($employee->isEmpty())
-        <p>no employee dtr data.</p>
-    @else
 
         <table>
             <thead>
@@ -199,8 +203,6 @@
 
         </table>
 
-    @endif
-
     <!-- SCRIPT -->
     <script>
 
@@ -217,5 +219,9 @@
         }
 
     </script>
-
+@endif
 </div>
+
+
+
+@endsection

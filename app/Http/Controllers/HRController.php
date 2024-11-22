@@ -33,6 +33,9 @@ class HRController extends Controller
         $timeOut = $request->input('timeOut');
         $rate = $request->input('rate');
 
+        $insurance = $request->input('insurance');
+        $retirement = $request->input('retirement');
+
         // update the employee
         DB::table('users')->where('id', $id)->update([
 
@@ -54,7 +57,9 @@ class HRController extends Controller
             'user_id' => $employee->id,
             'time_in_schedule' => $timeIn,
             'time_out_schedule' => $timeOut,
-            'rate' => $rate
+            'rate' => $rate,
+            'insurance' => $insurance,
+            'retirement_contribution' => $retirement
 
         ]);
 
@@ -101,7 +106,10 @@ class HRController extends Controller
 
         $timeIn = $request->input('timeIn');
         $timeOut = $request->input('timeOut');
+
         $rate = $request->input('rate');
+        $insurance = $request->input('insurance');
+        $retirement = $request->input('retirement');
 
         // check for existing email
         $existingEmail = DB::table('users')->where('email', $email)->first();
@@ -146,7 +154,9 @@ class HRController extends Controller
             'user_id' => $employeeID->id,
             'time_in_schedule' => $timeIn,
             'time_out_schedule' => $timeOut,
-            'rate' => $rate
+            'rate' => $rate,
+            'insurance' => $insurance,
+            'retirement_contribution' => $retirement
 
         ]);
 

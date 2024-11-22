@@ -1,5 +1,4 @@
-@extends('treasury.treasuryindex')
-<!-- main treasury dash -->
+@extends('programhead.programheadindex')
 @section('content')
 
 <style>
@@ -151,12 +150,13 @@
 
 <div id="dtrContainer">
 
+@if($employee->isEmpty())
+    <p style="font-weight:bold; font-size: 20px">no employee dtr data.</p>
+@else
+
     <!-- info & print -->
     <div id="salaryPeriodLabel">Salary Period:</div>
     <div class="date-picker">
-        @if($employee->isEmpty())
-            <div>no employee dtr data.</div>
-        @else
             <form id="dropdownForm" action="{{ route('show.dateDTR') }}" method="get">
                 <select id="dropdown" name="selected_date" onchange="submitForm()">
                     <option disabled selected>Select a date</option>
@@ -168,15 +168,10 @@
                 </select>
                 <input type="hidden" name="employeeID" value="{{ $id }}">
             </form>
-        @endif
         <button class="btn-print" id="print" onclick="window.print()">PRINT</button>
     </div>
 
     <!-- table -->
-
-    @if($employee->isEmpty())
-        <p>no employee dtr data.</p>
-    @else
 
         <table>
             <thead>
@@ -208,8 +203,6 @@
 
         </table>
 
-    @endif
-
     <!-- SCRIPT -->
     <script>
 
@@ -226,7 +219,9 @@
         }
 
     </script>
-
+@endif
 </div>
+
+
 
 @endsection

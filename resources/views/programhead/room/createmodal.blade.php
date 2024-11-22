@@ -1,4 +1,3 @@
-
 <!-- Modal toggle -->
 <div class="flex justify-center m-5">
     <button id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal"
@@ -43,21 +42,23 @@
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
-                        <label for="name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Room Name</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Room
+                            Name</label>
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Type building name" required="">
+                            placeholder="Type room name" required="">
                     </div>
-                    
-                    <div>
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Building</label>
-                        <select id="category" name="building_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
 
-                        <!-- for each -->
-                        @foreach ($buildings as $building)
-                        <option value="{{ $building->id }}">{{ $building->name }}</option>
-                        @endforeach
+                    <div>
+                        <label for="category"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Building</label>
+                        <select id="category" name="building_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+                            <!-- for each -->
+                            @foreach ($buildings as $building)
+                                <option value="{{ $building->id }}">{{ $building->name }}</option>
+                            @endforeach
 
                         </select>
                     </div>

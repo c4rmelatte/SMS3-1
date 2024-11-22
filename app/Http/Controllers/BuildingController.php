@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Building;
+use App\Models\Room;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\DB;
+
 class BuildingController extends Controller
 {
     // create building
@@ -21,7 +22,7 @@ class BuildingController extends Controller
 
     public function index()
     {
-        $building = Building::get();
+        $building = Building::latest()->get();
         return $building;
     }
 
@@ -49,5 +50,19 @@ class BuildingController extends Controller
 
         $buildings->save();
         return Redirect::to('/admin/building');
+    }
+
+    //para daw makita yung mga rooms
+    public function showRooms(Room $room, Building $building){
+        $building = Building::findOrFail($building->id);
+
+        $rooms = Room::where('building_id', $building->id)->latest()->get('name');
+        $roomCount = $rooms->count();
+
+        return view('admin.building.components.showrooms')->with([
+            'building' => $building,
+            'rooms' => $rooms,
+            'count' => $roomCount,
+        ]);
     }
 }

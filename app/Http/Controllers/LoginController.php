@@ -9,7 +9,7 @@ class LoginController extends Controller
     // find user
     public function loginUser(Request $request)
     {
-
+        
         $email = $request->input('email');
         $password = $request->input('password');
 
@@ -29,27 +29,28 @@ class LoginController extends Controller
         // Save user ID in the session
         $request->session()->put('user', $user);
         $request->session()->put('userID', $user->id);
+        $request->session()->put('userPosition', $user->position);
+        $request->session()->put('userDepartment', $user->department);
 
         $userRole = $user->position;
 
         if ($userRole == 'students') {
             return redirect()->route('student');
 
-        } elseif ($userRole == 'program_head') {
+        } elseif ($userRole == 'program_heads') {
             return redirect()->route('programhead');
 
         } elseif ($userRole == 'professors') {
-            // return view of professor
+            return redirect()->route('professor');
 
         } elseif ($userRole == 'hr') {
-            // return view of hr
+            return redirect()->route('hr');
 
         } elseif ($userRole == 'admin') {
-            // return view of admin
-
             return redirect()->route('admin');
+
         } elseif ($userRole == 'treasury') {
-            return redirect()->route('treasuryView');
+            return redirect()->route('treasury');
 
         } elseif ($userRole == 'registrar') {
             // return view of registrar
@@ -58,7 +59,7 @@ class LoginController extends Controller
     }
 
     // logout user
-    public function logout(Request $request)
+    public function logoutUser(Request $request)
     {
         // Clear the session
         $request->session()->flush();

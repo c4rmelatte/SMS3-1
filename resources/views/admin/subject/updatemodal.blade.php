@@ -53,6 +53,13 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject Code</label>
                         <input type="text" name="code" id="code" value="{{$subject->code}}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            placeholder="Type subject unit" required="">
+                    </div>
+
+                    <div>
+                        <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject Unit</label>
+                        <input type="text" name="unit" id="unit" value=""
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                             placeholder="Type subject code" required="">
                     </div>
 
@@ -69,7 +76,7 @@
                         </select>
 
                     </div>
-                    <div class="sm:col-span-2">
+                    <div class="">
                         <label for="description"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                         <input type="text" name="description" value="{{$subject->description}}" id="description"

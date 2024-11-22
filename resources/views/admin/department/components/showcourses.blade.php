@@ -6,10 +6,10 @@
    <h1 class="text-3xl text-[#37584F] font-bold">Courses</h1>
   </div>
   <hr class="w-full mb-3">
-  <div class="grid grid-cols-3 gap-3">
+  <div class="">
      <ul class="space-y-4 mt-4 text-gray-500 dark:text-gray-400">
+       @if ($count > 0)
     @foreach ($courses as $course)
-    @if ($count > 0)
     <li class="flex items-center space-x-3 rtl:space-x-reverse">
      <svg class="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
@@ -21,10 +21,10 @@
      </span>
     </li>
         
+    @endforeach
     @else
       <li class="flex items-center space-x-3 rtl:space-x-reverse">No Course Added.</li>
     @endif
-    @endforeach
    </ul>
   </div>
  </div>

@@ -25,38 +25,41 @@
        
        <div id="default-styled-tab-content justify-center">
            <div class="hidden p-4 rounded-lg bg-white -50 dark:bg-black-800" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
-           
-       
-       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
            <table class="w-full text-sm text-center rtl:text-right text-black-500 dark:text-black-400 bg-teal-800">
-               <thead class="text-base text-white uppercase bg-white-50 dark:bg-white-700 dark:text-white-400">
-                   <tr>
-                       <th scope="col" class="px-6 py-3">
-                           ID
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Name
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Price
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Created
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Updated
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Action
-                       </th>
-                   </tr>
-               </thead>
+           <thead class="text-base text-white uppercase bg-white-50 dark:bg-white-700 dark:text-white-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Created
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Updated
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+           </thead>
                <tbody>
                @foreach (json_decode($products) as $product)
                <tr class="text-black p-8" style="background:#F3F2ED;">
                    <td>{{$product->id}}</td>
                    <td>{{$product->name}}</td>
                    <td>{{$product->price}}</td>
+                   <td>{{$product->type}}</td>
                    <td>{{ $product->created_at}}</td>
                    <td>{{ $product->updated_at}}</td>
                    <td> 
@@ -82,26 +85,49 @@
             @endforeach
             </tbody>
         </table>
-    </div>
+            </div>
     
         <div class="hidden p-4 rounded-lg bg-black-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
         <div class="paidtable d-flex justify-content-center align-items-start ms-5" >
 <div class="card d-flex justify-content-center align-items-center w-100 ms-5 mx-auto p-3">
 <table class="table">
   <thead>
-    <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Purpose</th>
-                <th scope="col">Price</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Change</th>
-                <th scope="col">Type</th>
-                <th scope="col">IsPaid</th>
-                <th scope="col">Created</th>
-                <th scope="col">Updated</th>
-                <th scope="col">Action</th>
-    </tr>
+
+         <tr>
+            <th scope="col" class="px-6 py-3">
+                ID
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Name
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Purpose
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Price
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Amount
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Change
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Type
+            </th>
+            <th scope="col" class="px-6 py-3">
+                IsPaid
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Created
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Updated
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Action
+            </th>
+        </tr>
   </thead>
     <tbody>
         @foreach (json_decode($payments) as $payment)
@@ -142,73 +168,6 @@
 </div>
 </div>
 
-
-
-
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-           <table class="w-full text-sm text-left rtl:text-right text-black-500 dark:text-black-400 bg-teal-800">
-               <thead class="text-xs text-white uppercase bg-white-50 dark:bg-white-700 dark:text-white-400">
-                   <tr>
-                       <th scope="col" class="px-6 py-3">
-                           ID
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Name
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Purpose
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Price 
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Amount
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Change
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Type
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           isPaid
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Created
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Updated
-                       </th>
-                       <th scope="col" class="px-6 py-3">
-                           Action
-                       </th>
-                   </tr>
-               </thead>
-               <tbody>
-    @foreach (json_decode($payments) as $payment)
-    <tr class="text-black" style="background:#000000;">
-      <td>{{ $payment->id}}</td>
-      <td>{{ $payment->name}}</td>
-      <td>{{ $payment->purpose}}</td>
-      <td>{{ $payment->price}}</td>
-      <td>{{ $payment->amount}}</td>
-      <td>{{ $payment->change}}</td>
-      <td>{{ $payment->type}}</td>
-      <td>{{ $payment->isPaid}}</td>
-      <td>{{ $payment->created_at}}</td>
-      <td>{{ $payment->updated_at}}</td>
-      <td>      <a href="{{route('edit_payment',$payment->id)}}" class="btn btn-success">Edit</a>
-      <form action="{{route('delete_payment', $payment->id)}}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
-        </form>
-    </tr>
-    @endforeach
-               </tbody>
-           </table>
-       </div>
            </div>
            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-settings" role="tabpanel" aria-labelledby="settings-tab">
                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>

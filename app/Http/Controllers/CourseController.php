@@ -10,8 +10,8 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Courses::orderBy('id', 'DESC')->get();
-        $departments = Department::orderBy('id', 'DESC')->get(); 
+        $courses = Courses::latest()->get();
+        $departments = Department::latest()->get(); 
         return view('admin.pages.courses')->with(['courses' => $courses, 'departments' => $departments]);
     }
 

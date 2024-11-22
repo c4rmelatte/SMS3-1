@@ -8,7 +8,7 @@
 
   <div class="flex items-between justify-end">
   <span class="flex">
-   @include('programhead.announcements.updatemodal')
+   @include('programhead.assignsubject.updatemodal')
 
    <a href="">
     <svg class="w-6 h-6 text-red-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

@@ -20,14 +20,8 @@ class TreasuryController extends Controller
         $payments = Payment::all();
         $funds = TotalFunds::firstOrCreate(
             ['funds'=>request(0)]);
-
-        // if (!$funds){
-        //     totalFunds::create([
-        //         'funds' => 0
-        //     ]);
-        // }
-    
-        return view('treasury.pages.treasury', compact('products','announcements','payments','funds'));
+            
+        return view('treasury.pages.treasury', compact('products','announcements','payments','funds','tuitionFee'));
     }
 
 
@@ -42,7 +36,8 @@ class TreasuryController extends Controller
 
         Purpose::create([
             'name'=>$request->get('name'),
-            'price'=>$request->get('price')
+            'price'=>$request->get('price'),
+            'type'=>$request->get('type')
         ]);
 
         return redirect()->to('/treasury');
@@ -59,7 +54,8 @@ class TreasuryController extends Controller
     
         $product->update([
         'name' => $request->get('name'),
-        'price' => $request->get('price')
+        'price' => $request->get('price'),
+        'type'=>$request->get('type')
         ]);
 
         return redirect()->to('/treasury')->with('success', 'Product updated successfully.');

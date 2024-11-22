@@ -28,6 +28,10 @@ return new class extends Migration // MODIFIED BY ORTEGA 10:19 AM NOV 18 *******
             // salary
             $table->decimal('rate', 8, 2)->default(0.00);
 
+            // deductions
+            $table->decimal('insurance', 8, 2)->default(0.00);
+            $table->decimal('retirement_contribution', 8, 2)->default(0.00);
+
             $table->timestamps();
         });
 
@@ -43,6 +47,10 @@ return new class extends Migration // MODIFIED BY ORTEGA 10:19 AM NOV 18 *******
 
             // salary
             $table->decimal('rate', 8, 2)->default(0.00);
+
+            // deductions
+            $table->decimal('insurance', 8, 2)->default(0.00);
+            $table->decimal('retirement_contribution', 8, 2)->default(0.00);
 
             $table->timestamps();
         });
@@ -60,6 +68,10 @@ return new class extends Migration // MODIFIED BY ORTEGA 10:19 AM NOV 18 *******
             // salary
             $table->decimal('rate', 8, 2)->default(0.00);
 
+            // deductions
+            $table->decimal('insurance', 8, 2)->default(0.00);
+            $table->decimal('retirement_contribution', 8, 2)->default(0.00);
+
             $table->timestamps();
         });
 
@@ -75,6 +87,10 @@ return new class extends Migration // MODIFIED BY ORTEGA 10:19 AM NOV 18 *******
 
             // salary
             $table->decimal('rate', 8, 2)->default(0.00);
+
+            // deductions
+            $table->decimal('insurance', 8, 2)->default(0.00);
+            $table->decimal('retirement_contribution', 8, 2)->default(0.00);
 
             $table->timestamps();
         });
@@ -92,6 +108,10 @@ return new class extends Migration // MODIFIED BY ORTEGA 10:19 AM NOV 18 *******
             // salary
             $table->decimal('rate', 8, 2)->default(0.00);
 
+            // deductions
+            $table->decimal('insurance', 8, 2)->default(0.00);
+            $table->decimal('retirement_contribution', 8, 2)->default(0.00);
+
             $table->timestamps();
         });
 
@@ -107,6 +127,10 @@ return new class extends Migration // MODIFIED BY ORTEGA 10:19 AM NOV 18 *******
 
             // salary
             $table->decimal('rate', 8, 2)->default(0.00);
+
+            // deductions
+            $table->decimal('insurance', 8, 2)->default(0.00);
+            $table->decimal('retirement_contribution', 8, 2)->default(0.00);
 
             $table->timestamps();
         });

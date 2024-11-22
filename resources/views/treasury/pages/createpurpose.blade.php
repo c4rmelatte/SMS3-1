@@ -16,7 +16,7 @@
                         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                         <input type="text" id="name" name="name" 
                                class="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                               placeholder="Enter name" required>
+                               placeholder="Ex. Misc, Other Charges" required>
                     </div>
         
                     <!-- Price Field -->
@@ -24,7 +24,7 @@
                         <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
                         <input type="number" id="price" name="price" 
                                class="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                               placeholder="Enter price" required>
+                               placeholder="Ex. 100.00" required>
                     </div>
                 </div>
                 <!-- type -->
@@ -34,7 +34,7 @@
                 placeholder="Select type" required >
                         <option value="Tuition">Tuition</option>
                         <option value="Miscellaneous">Miscellaneous</option>
-                        <option value="Other_Charges">Other_Charges</option>
+                        <option value="Other_Charges">Other Charges</option>
                 </select>
         
                 <!-- Submit Button -->

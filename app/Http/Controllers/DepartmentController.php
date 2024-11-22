@@ -60,21 +60,22 @@ class DepartmentController extends Controller
         return Redirect::to('/admin/departments');
     }
 
-    public function showCourses(Courses $course, Department $department)
+    public function showCourses(Department $department)
     {
 
         $departments = Department::findOrFail($department->id);
 
         $courses = Courses::where('department_id', $department->id)
             ->latest()
-            ->get('name'); //pre uuwi muna ako HAHHAHAH
+            ->get('name'); 
 
-        $count = Courses::where('department_id', $department->id)
-            ->count(); //check lang kung may naadd kana ba na course sa dept or wala pa
+        $count = $courses->count(); 
+        //check lang kung may naadd kana ba na course sa dept or wala pa
+        //kupal kaba?
 
         return view('admin.department.components.showcourses')
             ->with('departments', $departments)
             ->with('count', $count)
             ->with('courses', $courses);
     }
-} 
+}

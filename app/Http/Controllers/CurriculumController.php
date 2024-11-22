@@ -12,8 +12,8 @@ class CurriculumController extends Controller
 {
     public function index()
     {
-        $curriculums = Curriculum::orderByDesc('id')->get();
-        $courses = Courses::orderBy('id', 'DESC')->get();
+        $curriculums = Curriculum::latest()->get();
+        $courses = Courses::latest()->get();
         return view('admin.pages.curriculum')->with(['courses' => $courses, 'curriculums' => $curriculums]);
     }
 
@@ -34,15 +34,17 @@ class CurriculumController extends Controller
         return Redirect::to('/admin/curriculum');
     }
 
-    public function showCourses(Courses $courses, Curriculum $curriculum)
+    public function showCourses(Courses $courses, Curriculum $curriculum, Subject $subject)
     {
-        $curriculums = Curriculum::findOrFail($curriculum->id);
-        $courses = Courses::where('id', $curriculums->course_id)->get('name');
-        $subjects = Subject::where('curriculum_id', $curriculum->id)->latest()->get();
+        $curriculums = $curriculum->findOrFail($curriculum->id);
+        $course = $courses->where('id', $curriculums->course_id)->get('name');
+        $subjects = $subject->where('curriculum_id', $curriculum->id)->latest()->get('name');
+        $count = $subjects->count();
         return view('admin.curriculum.components.viewcurriculum')->with(
-            [ 'courses' => $courses, 
+            [ 'courses' => $course, 
               'curriculums' => $curriculums,
               'subjects' => $subjects,
+              'count' => $count,
         ]);
     }
 

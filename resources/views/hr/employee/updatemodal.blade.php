@@ -90,12 +90,13 @@
 
                     <!-- DEPARTMENT -->
                      
-            
-                    <div>
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deparment</label>
-                        <select id="category" name="building_id" value=""
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                    <div class="col-span-4 sm:col-span-2">
+                        <label for="department"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+
+                            <input type="text" name="employeePosition" id="employeePositionUpdate"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="" required="" value="{{ $employee->department }}" readonly/>
                     </div>
                     
 
@@ -179,13 +180,31 @@
                     </div>
 
                     <!-- rate per hour -->
-                    <div class="col-span-4 sm:col-span-4">
+                    <div class="col-span-4 sm:col-span-1">
                         <label for="rate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rate per
-                            Hour:</label>
+                            Hour</label>
 
                         <input type="number" name="rate" id="rate"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="$$$" required />
+                    </div>
+
+                    <!-- insurance -->
+                    <div class="col-span-4 sm:col-span-1">
+                        <label for="insurance" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insurance</label>
+
+                        <input type="number" name="insurance" id="insurance"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="$" required />
+                    </div>
+
+                    <!-- retirement -->
+                    <div class="col-span-4 sm:col-span-2">
+                        <label for="retirement" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Retirement Contribution</label>
+
+                        <input type="number" name="retirement" id="retirement"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="$" required />
                     </div>
 
                 </div>

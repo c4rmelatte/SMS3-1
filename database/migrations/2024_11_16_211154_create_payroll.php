@@ -15,13 +15,20 @@ return new class extends Migration
     {
         Schema::create('payroll', function (Blueprint $table) {
             $table->id(); // unnecessary
-            $table->unsignedInteger('date_start'); // remove
-            $table->unsignedInteger('date_end'); // remove
-            $table->unsignedInteger('amount'); // remove
-            $table->unsignedInteger('deductions'); // remove
+            $table->text('department');
+            $table->text('position');
+            $table->text('pay_period');
+            $table->text('pay_date');
+            $table->decimal('base_salary', 8, 2)->default(0.00);
+            //$table->text('additional_hours');
+            $table->decimal('bonus', 8, 2)->default(0.00);
+            //$table->decimal('tax', 8, 2)->default(0.00);
+            $table->decimal('insurance', 8, 2)->default(0.00);
+            $table->decimal('retirement_contribution', 8, 2)->default(0.00);
+            $table->text('account_number');
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             // additions from us ************************************
 

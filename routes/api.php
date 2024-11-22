@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubjectController;
+// use App\Http\Controllers\AssignSubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ Route::get('/user', function (Request $request) {
 Route::apiResource('building', BuildingController::class);
 
 Route::apiResource('curriculum', CurriculumController::class);
+// Route::apiResource('assignsubject', AssignSubjectController::class);
 
 Route::apiResource('course', CourseController::class);
 Route::apiResource('announcements', AnnouncementsController::class);

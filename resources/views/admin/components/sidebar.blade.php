@@ -13,7 +13,7 @@
    aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-[#38574F] dark:bg-gray-800">
       <a href="{{url('/admin')}}" class="flex items-center text-white ps-2.5 mb-5">
-         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ADMIN</span>
+         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">REGISTRAR</span>
       </a>
       <ul class="space-y-2 font-medium">
          <li>
@@ -98,6 +98,25 @@
                <span class="flex-1 ms-3 whitespace-nowrap">SUBJECTS</span>
             </a>
          </li>
+
+@php
+    $userID = session('userID');
+    $userPosition = session('userPosition');
+@endphp
+
+@if ($userID && $userPosition == 'admin')
+
+         <li>
+            <a href="{{ route('admin.show.dtr', ['userID' => $userID]) }}" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->routeIs('admin.show.dtr') ? 'bg-[#1F342E]' : '' }}">
+            <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
+                    </svg>
+               <span class="flex-1 ms-3 whitespace-nowrap">DTR</span>
+            </a>
+         </li>  
+
+@endif
+
       </ul>
    </div>
 </aside>

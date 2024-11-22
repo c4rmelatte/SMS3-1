@@ -203,22 +203,38 @@ class DTRController extends Controller // OFFLINE MODIFIED
         $employee = DB::table('employee_dtr')->where('user_id', $id)->where('month_year', $monthYear)->get();
         $monthYears = DB::table('employee_dtr')->where('user_id', $id)->distinct()->pluck('month_year');
 
-        if ($position == 'students') {
-            return redirect()->route('student');
-
-        } elseif ($position == 'program_head') {
-            return redirect()->route('programhead');
+        
+        if ($position == 'program_heads') {
+            return view('programhead/pages/programheaddtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]);
 
         } elseif ($position == 'professors') {
-            // return view of professor
+            return view('professor/pages/professordtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]);
 
         } elseif ($position == 'hr') {
-            // return view of hr
+            return view('hr/pages/hrdtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]); 
 
         } elseif ($position == 'admin') {
-            // return view of admin
-
-            return redirect()->route('admin');
+            return view('admin/pages/admindtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]);
         } elseif ($position == 'treasury') { // TREASURY VIEW DTR **********************************************************
 
             return view('treasury/pages/treasurydtr', [
@@ -226,10 +242,11 @@ class DTRController extends Controller // OFFLINE MODIFIED
                 'monthYears' => $monthYears,
                 'id' => $id,
                 'monthYearDisplay' => $monthYear
-            ]);
+            ]); 
 
         } elseif ($position == 'registrar') {
-            // return view of registrar
+            
+            // deprecated!!!
 
         }
 
@@ -251,22 +268,37 @@ class DTRController extends Controller // OFFLINE MODIFIED
         $employee = DB::table('employee_dtr')->where('user_id', $id)->where('month_year', $monthYear)->get();
         $monthYears = DB::table('employee_dtr')->where('user_id', $id)->distinct()->pluck('month_year');
 
-        if ($position == 'students') {
-            return redirect()->route('student');
-
-        } elseif ($position == 'program_head') {
-            return redirect()->route('programhead');
+        if ($position == 'program_heads') {
+            return view('programhead/pages/programheaddtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]);
 
         } elseif ($position == 'professors') {
-            // return view of professor
+            return view('professor/pages/professordtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]);
 
         } elseif ($position == 'hr') {
-            // return view of hr
+            return view('hr/pages/hrdtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]); 
 
         } elseif ($position == 'admin') {
-            // return view of admin
-
-            return redirect()->route('admin');
+            return view('admin/pages/admindtr', [
+                'employee' => $employee,
+                'monthYears' => $monthYears,
+                'id' => $id,
+                'monthYearDisplay' => $monthYear
+            ]);
         } elseif ($position == 'treasury') { // TREASURY VIEW DTR **********************************************************
 
             return view('treasury/pages/treasurydtr', [
@@ -274,10 +306,11 @@ class DTRController extends Controller // OFFLINE MODIFIED
                 'monthYears' => $monthYears,
                 'id' => $id,
                 'monthYearDisplay' => $monthYear
-            ]);
+            ]); 
 
         } elseif ($position == 'registrar') {
-            // return view of registrar
+            
+            // deprecated!!!
 
         }
 

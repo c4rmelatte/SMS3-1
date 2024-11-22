@@ -12,12 +12,12 @@
       </a>
       <ul class="space-y-2 font-medium">      
          <li>
-            <a href="{{url('/professor/activities')}}" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('professor/activities') ? 'bg-[#1F342E]' : '' }}">
+            <a href="{{url('/professor/subjects')}}" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('professor/activities') ? 'bg-[#1F342E]' : '' }}">
             <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd" d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11.5c.07 0 .14-.007.207-.021.095.014.193.021.293.021h2a2 2 0 0 0 2-2V7a1 1 0 0 0-1-1h-1a1 1 0 1 0 0 2v11h-2V5a2 2 0 0 0-2-2H5Zm7 4a1 1 0 0 1 1-1h.5a1 1 0 1 1 0 2H13a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h.5a1 1 0 1 1 0 2H13a1 1 0 0 1-1-1Zm-6 4a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM7 6a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H7Zm1 3V8h1v1H8Z" clip-rule="evenodd"/>
             </svg>
 
-               <span class="ms-3">ACTIVITIES</span>
+               <span class="ms-3">Subjects</span>
             </a>
          </li>
 
@@ -48,6 +48,25 @@
                <span class="flex-1 ms-3 whitespace-nowrap">SCHEDULE</span>
             </a>
          </li>
+
+@php
+    $userID = session('userID');
+    $userPosition = session('userPosition');
+@endphp
+
+@if ($userID && $userPosition == 'professors')
+
+         <li>
+            <a href="{{ route('professor.show.dtr', ['userID' => $userID]) }}" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->routeIs('professor.show.dtr') ? 'bg-[#1F342E]' : '' }}">
+            <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
+                    </svg>
+               <span class="flex-1 ms-3 whitespace-nowrap">DTR</span>
+            </a>
+         </li>  
+
+@endif
+
       </ul>
    </div>
 </aside>
