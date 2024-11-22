@@ -15,7 +15,7 @@ class AssignSubjectController extends Controller
     {
         // Get the currently logged-in user
         // $programHead = session('user');
-
+        
         $userID = session('userID');
         // dd($userID);
         $user = session('user');
@@ -40,6 +40,7 @@ class AssignSubjectController extends Controller
                 'subjects' => $subjects,
             ]);
         }
+        
     }
 
 

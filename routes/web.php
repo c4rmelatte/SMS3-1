@@ -187,6 +187,17 @@ Route::get('/programhead/schedule', function () {
    return view('programhead.pages.schedule');
 });
 
+Route::get('/programhead/schedule/blk', function () {
+   return view('programhead.pages.blockyr');
+});
+
+Route::get('/programhead/schedule/sched', function () {
+   return view('programhead.pages.sched');
+});
+
+
+
+
 // show students
 Route::get('/programhead/students', [StudentController::class, 'showStudents'])->name('programhead_show_students');
 

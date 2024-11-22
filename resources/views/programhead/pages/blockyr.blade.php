@@ -9,7 +9,7 @@
       <hr class="w-full mb-3">
 
       <div class="w-full">
-      @include('programhead.schedule.schedulecard')
+      @include('programhead.schedule.sched.blkyr')
       </div>
    </div>
 </div>
