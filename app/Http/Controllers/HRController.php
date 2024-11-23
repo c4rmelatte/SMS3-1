@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Models\Deparment;
-use App\Http\Models\Employee;
+// use App\Http\Models\Deparment;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -10,16 +10,24 @@ use Illuminate\Support\Facades\DB;
 class HRController extends Controller
 {
     // show *******************************************************************************************
-    public function showEmployees() {
+    public function showEmployees()
+    {
 
         // find employees
         $employees = DB::table('users')->where('position', '!=', 'students')->get();
+        $departments = Department::latest()->get();
 
-        return view('hr.pages.employee', ['employees' => $employees]);
+        return view('hr.pages.employee')->with(
+            [
+                'employees' => $employees,
+                'departments' => $departments
+            ]
+        );
     }
 
     // update *******************************************************************************************
-    public function updateEmployee(Request $request, $id) {
+    public function updateEmployee(Request $request, $id)
+    {
 
         $firstName = $request->input('fname');
         $middleName = $request->input('middleName');
@@ -67,7 +75,8 @@ class HRController extends Controller
     }
 
     // delete *******************************************************************************************
-    public function deleteEmployee($id) {
+    public function deleteEmployee($id)
+    {
 
         // delete the employee
         DB::table('users')->where('id', $id)->delete();

@@ -29,6 +29,7 @@ return new class extends Migration
         // student class attendance checklist table
         Schema::create('student_class_attendance_checklist', function (Blueprint $table) {
             $table->text('id_number');
+            $table->foreign('id_number')->references('id')->on('users')->onDelete('cascade');
             $table->text('studentName');
             $table->text('subject_id');
             $table->boolean('checklist')->default(false);
@@ -39,6 +40,7 @@ return new class extends Migration
         // student event attendance checklist table
         Schema::create('student_event_attendance_checklist', function (Blueprint $table) {
             $table->text('student_id');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('student_name');
             $table->text('event_name');
             $table->text('event_description');
@@ -53,7 +55,7 @@ return new class extends Migration
         // employee dtr table
         Schema::create('employee_dtr', function (Blueprint $table) {
             $table->text('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('month_year');
             $table->text('day');
             $table->text('time_in');

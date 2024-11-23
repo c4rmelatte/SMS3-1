@@ -22,11 +22,16 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');;
             $table->unsignedBigInteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');;
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+
+            // we put this so we can determine whether a specific subject is under specific section and year
+            $table->integer('year');
+            $table->foreign('year')->references('year_level')->on('section')->onDelete('cascade');
+            $table->integer('block'); 
+            $table->foreign('block')->references('block')->on('section')->onDelete('cascade');
 
             $table->unsignedInteger('time_start');
             $table->unsignedInteger('time_end');
-
 
             $table->timestamps();
         });

@@ -6,8 +6,8 @@
     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">BSIT 3-1</h5>
   </a>
 
-  <p class="text-sm text-gray-600 dark:text-gray-400">
-      
+  <p class="text-sm text-gray-600 dark:text-gray-400"> 
+    {{$message}}
   </p>
   </span>
 

@@ -17,7 +17,7 @@ class AttendanceController extends Controller // OFF MODIFIED
         
         $professorID = "22-2222-222";
 
-        $professor = DB::table('example_user')->where('role', 'professor')->where('user_id', $professorID)->first();
+        $professor = DB::table('users')->where('role', 'professors')->where('user_id', $professorID)->first();
 
         $subjects = DB::table('example_subjects')->where('professor_id', $professorID)->get();
 
@@ -59,7 +59,7 @@ class AttendanceController extends Controller // OFF MODIFIED
 
         foreach ($students as $student) {
 
-            $studentName = DB::table('example_user')->where('user_id', $student->student_id)->first();
+            $studentName = DB::table('users')->where('id', $student->student_id)->first();
             
             DB::table('student_class_attendance_checklist')->insert([
 
@@ -136,15 +136,15 @@ class AttendanceController extends Controller // OFF MODIFIED
     // PROGRAM HEAD ################################################################################################################
 
     // show events
-    public function showEvents() { // TO BE MODIFIED
+    public function showEvents($userID) { // TO BE MODIFIED
 
-        $programHeadID = "44-4444-444";
+        $programHeadID = $userID;
 
-        $programHead = DB::table('example_user')->where('role', 'program_head')->where('user_id', $programHeadID)->first();
+        $programHead = DB::table('users')->where('position', 'program_heads')->where('id', $programHeadID)->first();
 
         $events = DB::table('student_event_attendance_checklist')->where('program_head', $programHeadID)->select('event_name')->distinct()->get();
 
-        return view('pages/proghead_events', ['programHeadID' => $programHeadID, 'events' => $events]);
+        return view('programhead/pages/events/proghead_events', ['programHeadID' => $programHeadID, 'programHead' => $programHead, 'events' => $events]);
         
     }
     // show create page
@@ -152,9 +152,15 @@ class AttendanceController extends Controller // OFF MODIFIED
         
         $programHeadID = $request->input('programHeadID');
 
-        $courseYearBlocks = DB::table('example_student_subject')->distinct()->pluck('course_year_block');
+        //$courseYearBlocks = DB::table('example_student_subject')->distinct()->pluck('course_year_block');
 
-        return view('pages/create_event', ['programHeadID' => $programHeadID, 'courseYearBlocks' => $courseYearBlocks]);
+        $students = DB::table('students')->select('course', 'year_level', 'block')->distinct()->get();
+
+        $courseYearBlocks = $students->map(function ($student) {
+            return $student->course . ' ' . $student->year_level . '-' . $student->block;
+        });
+
+        return view('programhead/pages/events/create_event', ['programHeadID' => $programHeadID, 'courseYearBlocks' => $courseYearBlocks]);
 
     }
 
@@ -170,25 +176,32 @@ class AttendanceController extends Controller // OFF MODIFIED
         $description = $request->input('description');
         $selectedParticipants = $request->input('selectedParticipants', []);
 
+        // check if exits *****<<
         $eventExists = DB::table('student_event_attendance_checklist')->where('event_name', $eventName)->exists();
 
-        if ($eventExists) {
+        if ($eventExists) { 
             return redirect()->back()->with(['alert' => '*Event name already in use.*']);
         }
+        // end check *****>>
 
         foreach ($selectedParticipants as $selectedParticipant) {
-            
-            $studentIDs = DB::table('example_student_subject')->where('course_year_block', $selectedParticipant)->pluck('student_id');
+
+            [$course, $right] = explode(' ', $selectedParticipant); 
+
+            [$year_level, $block] = explode('-', $right);
+
+            $studentIDs = DB::table('students')->where('course', $course)->where('year_level', $year_level)->where('block', $block)->pluck('user_id');
 
             foreach ($studentIDs as $studentID) {
 
-                $student = DB::table('example_user')->where('user_id', $studentID)->first();
+                $student = DB::table('users')->where('id', $studentID)->first();
 
+                $studentFullname = "{$student->surname},  {$student->firstname} {$student->middlename}";
 
                 DB::table('student_event_attendance_checklist')->insert([
 
                     'student_id' => $studentID,
-                    'student_name' => $student->name,
+                    'student_name' => $studentFullname,
                     'event_name' => $eventName,
                     'event_description' => $description,
                     'course_year_block' => $selectedParticipant,
@@ -203,7 +216,7 @@ class AttendanceController extends Controller // OFF MODIFIED
 
         }
 
-        return redirect()->route('show.events', ['programHeadID' => $programHeadID]);
+        return redirect()->route('show.events', ['userID' => $programHeadID]);
 
     }
 
@@ -212,11 +225,13 @@ class AttendanceController extends Controller // OFF MODIFIED
         
         $eventName = $request->input('eventName');
 
+        $event = DB::table('student_event_attendance_checklist')->where('event_name', $eventName)->first();
+
         $eventChecklist = DB::table('student_event_attendance_checklist')->where('event_name', $eventName)->get();
 
-        $programHeadName = DB::table('example_user')->where('user_id', $eventChecklist[0]->program_head)->first();
+        $programHeadName = DB::table('users')->where('id', $eventChecklist[0]->program_head)->first();
 
-        return view('pages/proghead_attendance', ['eventChecklist' => $eventChecklist, 'programHeadName' => $programHeadName]);
+        return view('programhead/pages/events/proghead_attendance', ['eventChecklist' => $eventChecklist, 'programHeadName' => $programHeadName, 'event' => $event]);
 
     }
 
@@ -251,7 +266,7 @@ class AttendanceController extends Controller // OFF MODIFIED
 
         $event = DB::table('student_event_attendance_checklist')->where('event_name', $eventName)->first();
         
-        return view('pages/update_event', ['event' => $event]);
+        return view('programhead/pages/events/update_event', ['event' => $event]);
 
     }
 
@@ -290,7 +305,7 @@ class AttendanceController extends Controller // OFF MODIFIED
 
     }
 
-    // student **************************************
+    // student *****************************************************************************************************
 
     // show student's subject
     public function showStudentSubjects(Request $request) { // TO BE MODIFIED
@@ -301,7 +316,7 @@ class AttendanceController extends Controller // OFF MODIFIED
 
         $studentSubjects = DB::table('example_subjects')->where('course_year_block', $studentBlock->course_year_block)->get();
 
-        return view('pages/student_subjects', ['studentBlock' => $studentBlock, 'studentSubjects' => $studentSubjects]);
+        return view('programhead/pages/events/student_subjects', ['studentBlock' => $studentBlock, 'studentSubjects' => $studentSubjects]);
     }
 
     // show student subject attendance page
@@ -312,7 +327,7 @@ class AttendanceController extends Controller // OFF MODIFIED
 
         $subjectCode = DB::table('example_subjects')->where('subject_id', $subjectID)->first();
 
-        return view('pages/student_attendance', ['studentID' => $studentID, 'subjectID' => $subjectID, 'subjectCode' => $subjectCode->subject_code]);
+        return view('programhead/pages/events/student_attendance', ['studentID' => $studentID, 'subjectID' => $subjectID, 'subjectCode' => $subjectCode->subject_code]);
         
     }
 
@@ -342,15 +357,15 @@ class AttendanceController extends Controller // OFF MODIFIED
             
         }
 
-        return view('pages/student_attendance', [
-                                                 'attendanceDates' => $attendanceDates,
-                                                 'studentID' => $studentID,
-                                                 'subjectID' => $subjectID,
-                                                 'term' => $term,
-                                                 'subjectCode' => $subjectCode->subject_code,
-                                                 'present' => $present,
-                                                 'absent' => $absent
-                                                ]);
+        return view('programhead/pages/events/student_attendance', [
+                                                                        'attendanceDates' => $attendanceDates,
+                                                                        'studentID' => $studentID,
+                                                                        'subjectID' => $subjectID,
+                                                                        'term' => $term,
+                                                                        'subjectCode' => $subjectCode->subject_code,
+                                                                        'present' => $present,
+                                                                        'absent' => $absent
+                                                                    ]);
 
     }
 

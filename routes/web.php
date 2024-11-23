@@ -18,6 +18,8 @@ use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Middleware\TreasuryMiddleware;
 use App\Http\Controllers\AssignSubjectController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\AttendanceController;
 use App\Models\Building;
 use App\Models\Room;
 use App\Models\Department;
@@ -187,12 +189,10 @@ Route::get('/programhead/schedule', function () {
    return view('programhead.pages.schedule');
 });
 
-Route::get('/programhead/schedule/blk', function () {
-   return view('programhead.pages.blockyr');
-});
+Route::get('/programhead/schedule/blk', [SectionController::class, 'index']);
 
-Route::get('/programhead/schedule/sched', function () {
-   return view('programhead.pages.sched');
+Route::get('/programhead/schedule/sched',function(){
+   return view('programhead.pages.blockyr');
 });
 
 
@@ -218,6 +218,27 @@ Route::get('/programhead/dtr/getDateDTR', [DTRController::class, 'getDateDTR'])-
 // assign subj
 Route::get('/programhead/assignsubject', [AssignSubjectController::class, 'index']);
 Route::post('/programhead/assignsubject', [AssignSubjectController::class, 'assign_subject'])->name('assign_subject');
+
+
+// event/program attendance ************* ORTEGA ***************
+// show program head events
+Route::get('/programHead/{userID}/showEvents', [AttendanceController::class, 'showEvents'])->name('show.events');
+// show create event page
+Route::get('/programHead/createEvents', [AttendanceController::class, 'createEvents'])->name('create.events');
+// insert created event
+Route::post('/programHead/insertEvents', [AttendanceController::class, 'insertEvents'])->name('insert.events');
+// show event attendance
+Route::get('/programHead/showEventAttendance', [AttendanceController::class, 'showEventAttendance'])->name('show.event.events');
+// save/update event attendance
+Route::put('/programHead/updateEventAttendance', [AttendanceController::class, 'updateEventAttendance'])->name('update.event');
+// show edit event info page
+Route::get('/programHead/editEventAttendance', [AttendanceController::class, 'editEventAttendance'])->name('edit.event');
+// insert edit event info
+Route::put('/programHead/insertEditEventAttendance', [AttendanceController::class, 'insertEditEventAttendance'])->name('insert.edit.event');
+// delete event
+Route::delete('/programHead/deleteEventAttendance', [AttendanceController::class, 'deleteEventAttendance'])->name('delete.event');
+
+
 
 // REGISTRAR *************************************************************************************
 
