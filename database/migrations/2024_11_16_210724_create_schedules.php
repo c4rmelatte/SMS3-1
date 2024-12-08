@@ -26,9 +26,9 @@ return new class extends Migration
 
             // we put this so we can determine whether a specific subject is under specific section and year
             $table->integer('year');
-            $table->foreign('year')->references('year_level')->on('section')->onDelete('cascade');
+            // $table->foreign('year')->references('year_level')->on('section')->onDelete('cascade');
             $table->integer('block'); 
-            $table->foreign('block')->references('block')->on('section')->onDelete('cascade');
+            // $table->foreign('block')->references('block')->on('section')->onDelete('cascade');
 
             $table->unsignedInteger('time_start');
             $table->unsignedInteger('time_end');

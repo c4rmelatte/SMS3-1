@@ -32,9 +32,14 @@ return new class extends Migration
             $table->foreign('id_number')->references('id')->on('users')->onDelete('cascade');
             $table->text('studentName');
             $table->text('subject_id');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->boolean('checklist')->default(false);
             $table->text('date');
             $table->text('term');
+            // need mag add ng course year block dito
+            // $table->text('course');
+            // $table->text('year');
+            // $table->text('block');
         });
 
         // student event attendance checklist table

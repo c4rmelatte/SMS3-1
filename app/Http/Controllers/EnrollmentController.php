@@ -18,6 +18,10 @@ class EnrollmentController extends Controller
         $userID = session('userID');
         $userInfo = User::firstWhere('id',$userID);
         $studentInfo = Student::firstWhere('user_id',$userID);
+        $miscs = purpose::where('type', 'Miscellaneous')->get(); 
+        $tuitionFee = purpose::where('type', 'Tuition')->value('price');
+        $totalMiscFee = purpose::where('type', 'Miscellaneous')->sum('price');
+        $price = $totalMiscFee + $tuitionFee;
 
         if($userInfo->position != 'students'){
             return redirect('/student');
@@ -38,7 +42,7 @@ class EnrollmentController extends Controller
         $yearSection = $studentInfo->year_level."-".$studentInfo->block;
         
 
-        return view('student.pages.enrollmentform')
+        return view('student.pages.enrollmentform',  compact('miscs','tuitionFee','price','totalMiscFee'))
         ->with('firstName', $firstName)
         ->with('lastName', $lastName)
         ->with('middleName', $middleName)
@@ -68,8 +72,8 @@ class EnrollmentController extends Controller
     public function payEnrollment(Request $request)
     {
         $money = $request->input("amount");
-        $totalMiscPrice = purpose::where('type', 'miscellaneous')->sum('price');
-        $totalPrice = purpose::whereIn('type', ['tuition', 'Other_Charges'])->sum('price');
+        $totalMiscPrice = purpose::where('type', 'Miscellaneous')->sum('price');
+        $totalPrice = purpose::whereIn('type', ['Tuition', 'Other_Charges'])->sum('price');
         $price = $totalMiscPrice + $totalPrice;
         $change = $money - $price;
         $isPaid = FALSE;
@@ -103,7 +107,7 @@ class EnrollmentController extends Controller
             'funds',$totalAmount
          );
 
-         return redirect()->to('page nung enrollment basta');
+         return redirect()->to('student.pages.enrollmentform');
 
 
         }

@@ -14,3 +14,9 @@
    </div>
 </div>
 @endsection
+
+
+{{-- dalawa yung schedule, pacheck na nga din alin yung working --}}
+{{-- ahhh okay okay --}}
+
+{{-- patanggal na yung isa --}}

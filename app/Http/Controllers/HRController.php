@@ -15,7 +15,7 @@ class HRController extends Controller
 
         // find employees
         $employees = DB::table('users')->where('position', '!=', 'students')->get();
-        $departments = Department::latest()->get();
+        $departments = Department::latest()->select('name')->distinct()->get();
 
         return view('hr.pages.employee')->with(
             [
@@ -110,7 +110,8 @@ class HRController extends Controller
         $username = $request->input('username');
         $email = $request->input('email');
         $password = $request->input('password');
-        $department = 'CECT';
+        $departmentId = Department::where('name', $request->department)->first()->id;
+        $department = $request->input('department');
         $accountNumber = $request->input('accountNumber');
 
         $timeIn = $request->input('timeIn');
@@ -138,6 +139,7 @@ class HRController extends Controller
             'username' => $username,
             'email' => $email,
             'password' => $password,
+            'department_id' => $departmentId,
             'department' => $department,
             'category' => $category,
             'position' => $position,

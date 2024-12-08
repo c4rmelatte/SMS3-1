@@ -32,6 +32,15 @@ class LoginController extends Controller
         $request->session()->put('userPosition', $user->position);
         $request->session()->put('userDepartment', $user->department);
 
+        if ($user->position == 'program_heads') {
+
+            $departmentID = DB::table('departments')->where('name', $user->department)->select('id')->first();
+
+            $courses = DB::table('courses')->where('department_id', $departmentID->id)->get();
+
+            $request->session()->put('courses', $courses);
+        }
+
         $userRole = $user->position;
 
         if ($userRole == 'students') {

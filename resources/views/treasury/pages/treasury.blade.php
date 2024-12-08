@@ -27,7 +27,7 @@
            <div class="hidden p-4 rounded-lg bg-white -50 dark:bg-black-800" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
 
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-           <table class="w-full text-sm text-center rtl:text-right text-black-500 dark:text-black-400 bg-teal-800">
+           <table class="w-full text-sm text-center rtl:text-right text-black-500 dark:text-black-400 bg-[#2F4A2D]">
            <thead class="text-base text-white uppercase bg-white-50 dark:bg-white-700 dark:text-white-400">
             <tr>
                 <th scope="col" class="px-6 py-3">

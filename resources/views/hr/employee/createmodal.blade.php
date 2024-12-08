@@ -107,6 +107,8 @@
                                 <option selected="{{$department->id}}">{{$department->name}}</option>
                             @endforeach
                         </select>
+
+                        <input type="hidden" name="department_id" id="department_id">
                     </div>
 
 
@@ -242,8 +244,8 @@
     <!-- dynamically change dropdown -->
     <script>
 
-        const roleDropdown = document.getElementById('employeeCategory');
-        const positionDropdown = document.getElementById('employeePosition');
+        const roleDropdown = document.querySelector('#employeeCategory')
+         positionDropdown = document.querySelector('#employeePosition');
 
         const positions = {
             faculty: [
@@ -257,8 +259,8 @@
                 { value: 'registrar', text: 'Registrar' }
             ],
         };
-
-        roleDropdown.addEventListener('change', function () {
+        
+        function change() {
             // Clear existing options in the position dropdown
             positionDropdown.innerHTML = '<option value="" selected disabled>Select Position</option>';
 
@@ -274,7 +276,18 @@
                     positionDropdown.appendChild(option);
                 });
             }
+        }
+
+        roleDropdown.addEventListener('change', change);
+
+
+        // Set the hidden input value to the selected department's ID when the dropdown changes
+        document.getElementById('department').addEventListener('change', function() {
+             const departmentId = this.value;  // This should be the ID, not the name
+             document.getElementById('department_id').value = departmentId;  // Save the department ID in the hidden field
         });
+
+
 
     </script>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use App\Models\Department;
 use App\Models\Student;
 use App\Models\User;
 
@@ -35,11 +36,23 @@ class StudentController extends Controller
         $username = $request->input('username');
         $email = $request->input('email');
         $password = $request->input('password');
+        $departmentId = Department::where('name', $request->department)->first()->id;
         $department = $request->input('department');
 
-        $yearlevel = $request->input('studentYear');
+        //$yearlevel = $request->input('studentYear');
         $course = $request->input('studentCourse');
-        $block = $request->input('studentSection');
+        //$block = $request->input('studentSection');
+
+        $studentSection = $request->input('studentSection');
+
+        $string = $studentSection;
+
+        // Split
+        $parts = explode(' - ', $string);
+
+        // Assign
+        $yearlevel = $parts[0];
+        $block = $parts[1];
 
         // check for existing email
         $existingEmail = DB::table('users')->where('email', $email)->first();
@@ -59,6 +72,7 @@ class StudentController extends Controller
             'username' => $username,
             'email' => $email,
             'password' => $password,
+            'department_id' => $departmentId,
             'department' => $department,
             'category' => 'students',
             'position' => 'students',
@@ -86,15 +100,24 @@ class StudentController extends Controller
     // show students
     public function showStudents() {
 
+        $programheadDepartment = session('userDepartment');
+
         // find students
         $students = DB::table('users')->where('category', 'students')->get();
 
         // find students
         $students = DB::table('users')
                         ->join('students', 'users.id', '=', 'students.user_id')
+                        ->where('department', $programheadDepartment)
                         ->get();
 
-        return view('programhead.pages.student', ['students' => $students]);
+        // find the department
+        $department = DB::table('departments')->where('name',  $programheadDepartment)->first();
+
+        // find the sections wih the department id
+        $sections = DB::table('section')->where('department_id', $department->id)->get();
+
+        return view('programhead.pages.student', ['students' => $students, 'sections' => $sections]);
     }
 
     // update students

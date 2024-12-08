@@ -23,6 +23,7 @@ class CurriculumController extends Controller
         $curriculums->code = $request->get('code');
         $curriculums->name = $request->get('name');
         $curriculums->course_id = $request->get('course_id');
+        $curriculums->level = $request->get('curri_level');
         $curriculums->save();
 
         return Redirect::to('/admin/curriculum');
@@ -38,10 +39,10 @@ class CurriculumController extends Controller
     {
         $curriculums = $curriculum->findOrFail($curriculum->id);
         $course = $courses->where('id', $curriculums->course_id)->get('name');
-        $subjects = $subject->where('curriculum_id', $curriculum->id)->latest()->get('name');
+        $subjects = $subject->where('curriculum_id', $curriculum->id)->latest()->get();
         $count = $subjects->count();
         return view('admin.curriculum.components.viewcurriculum')->with(
-            [ 'courses' => $course, 
+            [ 'courses' => $course,
               'curriculums' => $curriculums,
               'subjects' => $subjects,
               'count' => $count,
@@ -58,6 +59,7 @@ class CurriculumController extends Controller
             'code' => $request->get('code'),
             'name' => $request->get('name'),
             'course_id' => $request->get('course_id'),
+            'level' => $request->get('curri_level'),
         ]);
 
         // Redirect to the departments list or other relevant page

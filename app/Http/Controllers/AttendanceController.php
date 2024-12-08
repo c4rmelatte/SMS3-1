@@ -13,15 +13,48 @@ class AttendanceController extends Controller // OFF MODIFIED
     // PROFESSOR ############################################################################################################
 
     // show professor subjets list
-    public function showSubjects() { // TO BE MODIFIED
+    public function showSubjects($userID) { // TO BE MODIFIED
         
-        $professorID = "22-2222-222";
+        $professorID = $userID;
 
-        $professor = DB::table('users')->where('role', 'professors')->where('user_id', $professorID)->first();
+        $professor = DB::table('users')->where('position', 'professors')->where('id', $professorID)->first();
 
-        $subjects = DB::table('example_subjects')->where('professor_id', $professorID)->get();
+        $assignedSubjects = DB::table('assigned_subject')->where('prof_id', $professorID)->get();
 
-        return view('pages/prof_subjects', ['subjects' => $subjects, 'professor' => $professor]);
+        $subjectArray = [];
+
+        $subjectSectionCollection = collect();
+
+        foreach ($assignedSubjects as $assignedSubject) {
+            $subject = DB::table('subjects')->where('id', $assignedSubject->subject_id)->first();
+            $subjectArray[] = $subject;
+        }
+
+        
+        //return $subjectArray;
+
+        // find students per subject per block
+        foreach ($subjectArray as $subjectID) {
+
+            $curriculum = DB::table('curriculums')->where('id', $subjectID->curriculum_id)->first();
+
+            $sections = DB::table('section')->where('course_id', $curriculum->course_id)->get();
+
+            //return $sections;
+
+            foreach ($sections as $section) {
+                
+                $course = DB::table('courses')->where('id', $section->course_id)->first();
+                
+                $subjectSectionCollection->push(['subject' => $subjectID, 'course' => $course->name, 'year' => $section->year_level, 'block' => $section->block]);
+
+            }
+            
+        }
+
+        //return $subjectSectionCollection;
+
+        return view('professor/attendance/prof_subjects', ['subjectSectionCollection' => $subjectSectionCollection, 'professor' => $professor]);
 
     }
 
@@ -29,10 +62,13 @@ class AttendanceController extends Controller // OFF MODIFIED
     public function showProfAttendance(Request $request) {
         
         $subjectID = $request->input('subjectID');
+        $course = $request->input('course');
+        $year = $request->input('year');
+        $block = $request->input('block');
 
-        $subject = DB::table('example_subjects')->where('subject_id', $subjectID)->first();
+        $subject = DB::table('subjects')->where('id', $subjectID)->first();
 
-        return view('pages/prof_attendance', ['subject' => $subject, 'students' => '']);
+        return view('professor/attendance/prof_attendance', ['subject' => $subject, 'course' => $course, 'year' => $year, 'block' => $block, 'students' => '']);
 
     }
 
@@ -40,9 +76,12 @@ class AttendanceController extends Controller // OFF MODIFIED
     public function addProfAttendance(Request $request) {
         
         $subjectID = $request->input('subjectID');
-        $courseYearBlock = $request->input('courseYearBlock');
         $term = $request->input('term');
         $date = $request->input('date');
+
+        $course = $request->input('course');
+        $year = $request->input('year');
+        $block = $request->input('block');
 
         // if existed
         $existedAttendance = DB::table('student_class_attendance_checklist')->where('subject_id', $subjectID)->where('date', $date)->where('term', $term)->first();
@@ -51,20 +90,30 @@ class AttendanceController extends Controller // OFF MODIFIED
             return redirect()->back()->with('alert', 'Cannot add attendance. Attendance already existing.');
         }
 
-        $students = DB::table('example_student_subject')->where('course_year_block', $courseYearBlock)->get();
+        //$students = DB::table('students')->where('course', $course)->where('year_level', $year)->where('block', $block)->get();
+
+        $students = DB::table('students')
+                        ->where('course', $course)
+                        ->where('year_level', $year)
+                        ->where('block', $block)
+                        ->get();
 
         // if ($students) {
         //     return $students;
         // }
 
+        // return $students;
+
         foreach ($students as $student) {
 
-            $studentName = DB::table('users')->where('id', $student->student_id)->first();
+            $studentName = DB::table('users')->where('id', $student->user_id)->first();
+
+            $studentFullname = "{$studentName->surname}, {$studentName->firstname} {$studentName->middlename}";
             
             DB::table('student_class_attendance_checklist')->insert([
 
-                'id_number' => $student->student_id,
-                'studentName' => $studentName->name,
+                'id_number' => $student->user_id,
+                'studentName' => $studentFullname,
                 'subject_id' => $subjectID,
                 'checklist' => false,
                 'date' => $date,
@@ -85,11 +134,15 @@ class AttendanceController extends Controller // OFF MODIFIED
         $date = $request->input('date');
         $subjectID = $request->input('subjectID');
 
+        $course = $request->input('course');
+        $year = $request->input('year');
+        $block = $request->input('block');
+
         $students = DB::table('student_class_attendance_checklist')->where('subject_id', $subjectID)->where('term', $term)->where('date', $date)->get();
 
-        $subject = DB::table('example_subjects')->where('subject_id', $subjectID)->first();
+        $subject = DB::table('subjects')->where('id', $subjectID)->first();
 
-        return view('pages/prof_attendance', ['students' => $students, 'subject' => $subject]);
+        return view('professor/attendance/prof_attendance', ['students' => $students, 'course' => $course, 'year' => $year, 'block' => $block, 'subject' => $subject]);
 
     }
 
@@ -103,7 +156,7 @@ class AttendanceController extends Controller // OFF MODIFIED
 
         $students = DB::table('student_class_attendance_checklist')->where('subject_id', $subjectID)->where('term', $term)->where('date', $date)->get();
 
-        $subject = DB::table('example_subjects')->where('subject_id', $subjectID)->first();
+        //$subject = DB::table('subjects')->where('subject_id', $subjectID)->first();
 
         foreach ($students as $student) {
 

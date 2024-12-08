@@ -11,7 +11,13 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Courses::latest()->get();
-        $departments = Department::latest()->get(); 
+        //$departments = Department::latest()->select('name')->distinct()->get();
+
+        $departments = Department::select('id', 'name')
+                                    ->latest('id')
+                                    ->groupBy('name')
+                                    ->get();
+
         return view('admin.pages.courses')->with(['courses' => $courses, 'departments' => $departments]);
     }
 

@@ -37,8 +37,8 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="">
-                <!-- @csrf -->
+            <form action="{{ route('insertData', ['id' => $subject]) }}" method="post">
+                @csrf
                 <div class="grid gap-4 mb-4 grid-cols-1">
 
                     <div class="">
@@ -51,9 +51,9 @@
 
 
                     <div>
-                        <label for="activity_label"
+                        <label for="label_activity"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type of Activity</label>
-                        <select id="activity_label" name="activity_label"
+                        <select id="label_activity" name="label_activity"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                             <option value="Quiz">Quiz</option>
                             <option value="Assignment">Assignment</option>
@@ -62,13 +62,24 @@
                     </div>
 
                     <div>
+                        <label for="label_student"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label of Student </label>
+                        <select id="label_student" name="label_student"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                            <option value="Pre-Elementary">Pre-Elementary</option>
+                            <option value="Grade School">Grade School</option>
+                            <option value="Junior High School">Junior High School</option>
+                            <option value="Senior High School">Senior High School</option>
+                            <option value="College">College</option>
+                        </select>
+                    </div> 
+
+                    <div>
                         <label for="label_term"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lable of Term </label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label of Term </label>
                         <select id="label_term" name="label_term"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-                            <option value="Prelim">Prelim</option>
-                            <option value="Midterm">Midterm</option>
-                            <option value="Finals">Finals</option>
+                            <option value="" selected disabled>Select a Label of Student First</option>
                         </select>
                     </div> 
 
@@ -80,6 +91,11 @@
                             placeholder="0" required="">
                     </div>
 
+                    <input type="hidden" name="user_id" id="{{$profID}}" value="{{$profID}}">
+
+
+                    
+
 
                 </div>
                 <button type="submit"
@@ -90,9 +106,45 @@
                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                             clip-rule="evenodd"></path>
                     </svg>
-                    ADD CURRICULUM
+                    ADD ACTIVITY
                 </button>
             </form>
         </div>
     </div>
+
+    <script>
+    const studentSelect = document.getElementById('label_student');
+    const termSelect = document.getElementById('label_term');
+
+    const termOptions = {
+        quarters: [
+            { value: '1st Quarter', text: '1st Quarter' },
+            { value: '2nd Quarter', text: '2nd Quarter' },
+            { value: '3rd Quarter', text: '3rd Quarter' },
+            { value: '4th Quarter', text: '4th Quarter' }
+        ],
+        terms: [
+            { value: 'Prelim', text: 'Prelim' },
+            { value: 'Midterm', text: 'Midterm' },
+            { value: 'Finals', text: 'Finals' }
+        ]
+    };
+
+    studentSelect.addEventListener('change', () => {
+        const selectedValue = studentSelect.value;
+        const isQuarterSystem = ['Pre-Elementary', 'Grade School', 'Junior High School'].includes(selectedValue);
+
+        // Clear existing options
+        termSelect.innerHTML = '';
+
+        // Add new options based on selection
+        const options = isQuarterSystem ? termOptions.quarters : termOptions.terms;
+        options.forEach(option => {
+            const opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            termSelect.appendChild(opt);
+        });
+    });
+</script>
 </div>

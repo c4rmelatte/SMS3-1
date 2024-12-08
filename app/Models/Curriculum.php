@@ -10,7 +10,8 @@ class Curriculum extends Model
     protected $fillable = [
         'code',
         'name',
-        'course_id'
+        'course_id',
+        'level'
     ];
 
     public function course()

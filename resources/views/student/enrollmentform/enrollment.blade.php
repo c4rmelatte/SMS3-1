@@ -111,6 +111,42 @@
       </table>
     </div>
 
+    <div class="mt-4">
+      <table class="w-1/2 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <tbody>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            Fees:
+            </th>
+          </tr>
+
+          <tr>
+              <td class="px-4 py-2">TUITION FEE</td>
+              <td class="px-4 py-2 text-right">₱ {{ $tuitionFee ? $tuitionFee : 'N/A'}}</td>
+          </tr>
+          <tr>
+              <td class="px-4 py-2 font-bold">MISCELLANEOUS FEES</td>
+              <td></td>
+          </tr>
+
+          @foreach (json_decode($miscs) as $misc)
+          <tr class="text-black p-8">
+                   <td class="px-7 py-2">{{$misc->name}}</td>
+                   <td  class="px-4 py-2 text-right">₱ {{$misc->price}}</td>
+          </tr>
+	        @endforeach
+          <tr>
+              <td class="px-4 py-2">MISC FEE</td>
+              <td class="px-4 py-2 text-right">₱ {{ $totalMiscFee ? $totalMiscFee : 'N/A' }}</td>
+          </tr>
+          <tr>
+              <td class="px-4 py-2">TOTAL CHARGE</td>
+              <td class="px-4 py-2 text-right">₱ {{ $price ? $price : 'N/A' }}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
 
     <div class="max-w-sm mt-5">
       <label for="total-units" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total Units:</label>
@@ -118,5 +154,37 @@
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         readonly>
     </div>
+
+
+    
   </div>
+  <div class="flex justify-end">
+    <div id="imageContainer" class="hidden ">
+      <img src="https://png.pngtree.com/png-vector/20230408/ourlarge/pngtree-enroll-stamp-design-transparent-background-vector-png-image_6695450.png" alt="Payment Successful" 
+      class=" w-1/2 h-36 rounded-lg ml-64">
+    </div>
+  </div>
+
+  <div class="mt-5 ">
+    <form action="{{ route('pay_enrollment') }}" method="POST">
+      @csrf
+        <button type="button" id="payButton"  class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+         onclick="showEnroll()">Pay Now</button>
+    </form>
+  </div>
+
+  <script>
+    function showEnroll() {
+        const imageContainer = document.getElementById('imageContainer');
+        const button = document.getElementById('payButton')
+
+      
+         button.setAttribute('disabled', 'true');
+          button.classList.add('bg-gray-400', 'cursor-not-allowed');
+          button.classList.remove('hover:bg-yellow-500'); 
+
+
+        imageContainer.classList.remove('hidden'); 
+    }
+    </script>
 </div>

@@ -168,5 +168,7 @@ return new class extends Migration // MODIFIED BY ORTEGA 10:19 AM NOV 18 *******
         Schema::dropIfExists('program_heads');
         Schema::dropIfExists('registrar');
         Schema::dropIfExists('students');
+        Schema::dropIfExists('admin');
+        Schema::dropIfExists('hr');
     }
 };

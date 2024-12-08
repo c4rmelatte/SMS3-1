@@ -33,6 +33,7 @@
                         <option value="Tuition">Tuition</option>
                         <option value="Miscellaneous">Miscellaneous</option>
                         <option value="Other_Charges">Other Charges</option>
+                        @endif
                 </select>
 
         <!-- Submit Button -->

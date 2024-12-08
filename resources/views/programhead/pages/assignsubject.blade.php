@@ -8,7 +8,7 @@
       </div>
       <hr class="w-full mb-3">
 
-      <div class="grid grid-cols-3 gap-3">
+      <div class="grid grid-cols-1">
          @include('programhead.assignsubject.assignsubjectcard')
       </div>
    </div>

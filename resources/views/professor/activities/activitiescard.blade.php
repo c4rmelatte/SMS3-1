@@ -1,33 +1,18 @@
 
-    <div
-    class="w-full p-4 flex mb-4 justify-between items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <span>
-    <a href="">
-      <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white hover:text-[#37584F]">
-      Quiz 1- ITIGIL NA NATIN TO
-      </h5>
-    </a>
-    </span>
-    <span class="grid grid-cols-3 gap-2">
-    @include('professor.activities.updatemodal')
-    <form action="">
 
-      <!-- @method("DELETE") -->
-      <button type="submit">
-      <svg class="w-6 h-6 text-red-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-      width="24" height="24" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-      d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-      </svg>
-      </button>
-    </form>
-    <a href="">
-      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-      width="24" height="24" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" stroke-width="2"
-      d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-      <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-      </svg>
+@foreach ($activity as $item)
+<div class="w-full p-6 flex mb-4 justify-between items-center bg-[#90BDB1] px-8 py-5 text-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all">
+  <span class="flex-1">
+    <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white hover:text-green-700">
+      {{ $item->name }} 
+    </h5>
+  </span>
+
+  <a href="{{ url('professor/activity/'.$item->id) }}" class="text-gray-500 dark:text-white text-2xl hover:text-gray-700 dark:hover:text-gray-300">
+      >
     </a>
-    </span>
-    </div>
+</div>
+@endforeach
+
+
+</div>

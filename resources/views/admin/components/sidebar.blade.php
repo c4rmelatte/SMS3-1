@@ -1,3 +1,36 @@
+<style>
+   .menu-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+      transition: background-color 0.1s ease-in-out;
+   }
+
+   .menu-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: #fff;
+      transform: scaleY(0);
+      transition: transform 0.3s ease-in-out;
+   }
+
+   .menu-item:hover,
+   .menu-item.active {
+      /* background-color: #548C7D; */
+      background: #2F4A2D;
+   }
+
+   .menu-item:hover::before,
+   .menu-item.active::before {
+      transform: scaleY(1);
+   }
+</style>
+
 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button"
    class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-white rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
    <span class="sr-only">Open sidebar</span>
@@ -11,14 +44,17 @@
 <aside id="logo-sidebar"
    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
    aria-label="Sidebar">
-   <div class="h-full px-3 py-4 overflow-y-auto bg-[#38574F] dark:bg-gray-800">
+   <div class="h-full px-3 py-4 overflow-y-auto bg-[#375735] dark:bg-gray-800">
+      <div class="flex justify-center mb-6">
+         <img src="{{ asset('images/L2.png')}}" alt="School-Logo" class="h-48 w-auto">
+      </div>
       <a href="{{url('/admin')}}" class="flex items-center text-white ps-2.5 mb-5">
          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">REGISTRAR</span>
       </a>
       <ul class="space-y-2 font-medium">
          <li>
             <a href="{{url('/admin/announcement')}}"
-               class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/announcement') ? 'bg-[#1F342E]' : '' }}">
+               class="menu-item flex items-center p-2 text-white rounded-r-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/announcement') ? 'active' : '' }}">
                <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                   width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path
@@ -31,7 +67,7 @@
 
          <li>
             <a href="{{url('/admin/building')}}"
-               class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/building') ? 'bg-[#1F342E]' : '' }}">
+               class="menu-item flex items-center p-2 text-white rounded-r-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/building') ? 'active' : '' }}">
                <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                   width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd"
@@ -45,7 +81,7 @@
 
          <li>
             <a href="{{url('/admin/departments')}}"
-               class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/departments') ? 'bg-[#1F342E]' : '' }}">
+               class="menu-item flex items-center p-2 text-white rounded-r-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/departments') ? 'active' : '' }}">
                <svg class="w-6 h-6 text-text-white dark:text-white" aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd"
@@ -61,7 +97,7 @@
 
          <li>
             <a href="{{url('/admin/courses')}}"
-               class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/courses') ? 'bg-[#1F342E]' : '' }}">
+               class="menu-item flex items-center p-2 text-white rounded-r-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/courses') ? 'active' : '' }}">
                <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                   width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd"
@@ -74,7 +110,7 @@
 
          <li>
             <a href="{{url('/admin/curriculum')}}"
-               class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/curriculum') ? 'bg-[#1F342E]' : '' }}">
+               class="menu-item flex items-center p-2 text-white rounded-r-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/curriculum') ? 'active' : '' }}">
                <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                   width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path
@@ -88,7 +124,7 @@
 
          <li>
             <a href="{{url('/admin/subject')}}"
-               class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/subject') ? 'bg-[#1F342E]' : '' }}">
+               class="menu-item flex items-center p-2 text-white rounded-r-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/subject') ? 'active' : '' }}">
                <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                   width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd"
@@ -99,24 +135,49 @@
             </a>
          </li>
 
-@php
-    $userID = session('userID');
-    $userPosition = session('userPosition');
-@endphp
-
-@if ($userID && $userPosition == 'admin')
 
          <li>
-            <a href="{{ route('admin.show.dtr', ['userID' => $userID]) }}" class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->routeIs('admin.show.dtr') ? 'bg-[#1F342E]' : '' }}">
-            <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
-                    </svg>
+            <a href="{{url('/admin/section')}}"
+               class="menu-item flex items-center p-2 text-white rounded-r-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->is('admin/section') ? 'active' : '' }}">
+               <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd"
+                     d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z"
+                     clip-rule="evenodd" />
+               </svg>
+               <span class="flex-1 ms-3 whitespace-nowrap">SECTION</span>
+            </a>
+         </li>
+
+         @php
+         $userID = session('userID');
+         $userPosition = session('userPosition');
+        @endphp
+
+         @if ($userID && $userPosition == 'admin')
+
+          <li>
+            <a href="{{ route('admin.show.dtr', ['userID' => $userID]) }}"
+               class="menu-item flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#1F342E] dark:hover:bg-gray-700 group {{ request()->routeIs('admin.show.dtr') ? '' : '' }}">
+               <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                 width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                 <path fill-rule="evenodd"
+                   d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z"
+                   clip-rule="evenodd" />
+               </svg>
                <span class="flex-1 ms-3 whitespace-nowrap">DTR</span>
             </a>
-         </li>  
+          </li>
 
-@endif
+       @endif
 
       </ul>
    </div>
+
+   <!-- <div id="logo-sidebar">
+      <div style="height: 2000px; background: linear-gradient(to bottom, #fff, #ccc);">
+         Dummy content to test scrolling.
+      </div>
+   </div> -->
+
 </aside>

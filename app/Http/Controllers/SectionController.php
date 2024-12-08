@@ -5,19 +5,56 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Section;
+use App\Models\Department;
+use App\Models\Courses;
 class SectionController extends Controller
 {
     public function index(){
 
-        //Gusto ko hanapin ng index ang course nya automatically, itatapon nung unang page yung course id papunta rito para makuha
+        $sections = Section::with('courses')
+        ->orderBy('year_level')  // You can change this to any field you want to order by
+        ->orderBy('block')      // Additional sorting can be done here
+        ->get();
 
-
-        // Gusto ko ilagay ang section "year_level" at "block"
-        $testitem = 'tulog na ta :D';
-
-        // itatapon natin ang year_level at section sa susunod na php para madaling mahanap ang subjects or dito na natin gawin para subjects na ang itapon sa kabila :D
-
-
-        return view('programhead.pages.blockyr')->with('message', $testitem);
+        $departments = Department::all();
+        $courses = Courses::all();
+    
+        return view('admin.pages.section')->with(['courses' => $courses, 'sections' => $sections, 'departments'=> $departments]);
     }
+
+    public function indexProg(){
+
+        $sections = Section::with('courses')
+        ->orderBy('year_level')  // You can change this to any field you want to order by
+        ->orderBy('block')      // Additional sorting can be done here
+        ->get();
+
+        $courses = Courses::all();
+    
+        return view('programhead.pages.schedule')->with(['courses' => $courses, 'sections' => $sections]);
+    }
+
+    public function store(Request $request)
+    {
+        $section = new Section();
+        $section->department_id = $request->get('department_id');
+        $section->course_id = $request->get('course_id');
+        $section->year_level = $request->get('year_level');
+        $section->block = $request->get('block');
+        $section->save();
+
+        return Redirect::to('/admin/section');
+    }
+
+    // public function update(Request $request, $id)
+    // {
+
+    // }
+
+    public function destroy(Section $section)
+    {
+        $section->delete();
+        return Redirect::to('/admin/section');
+    }
+
 }

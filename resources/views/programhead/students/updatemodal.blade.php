@@ -1,5 +1,5 @@
 <!-- Modal toggle -->
-<button id="updateProductButton" data-modal-target="updateProductModal-{$student->id}" data-modal-toggle="updateProductModal-{$student->id}">
+<button id="updateProductButton" data-modal-target="updateProductModal-{{ $student->id }}" data-modal-toggle="updateProductModal-{{ $student->id }}">
     <svg class="w-6 h-6 text-[#5A8277] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
         height="24" fill="currentColor" viewBox="0 0 24 24">
         <path fill-rule="evenodd"
@@ -11,7 +11,7 @@
     </svg>
 </button>
 
-<div id="updateProductModal-{$student->id}" tabindex="-1" aria-hidden="true"
+<div id="updateProductModal-{{ $student->id }}" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
@@ -23,7 +23,7 @@
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                    data-modal-toggle="updateProductModal">
+                    data-modal-toggle="updateProductModal-{{ $student->id }}">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -79,7 +79,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
                         <input type="text" name="department" id="department"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Department" required="" value="CECT" readonly/>
+                            placeholder="Department" required="" value="{{ $student->department }}" readonly/>
                     </div>
 
                     <!-- YEAR LEVEL -->

@@ -6,7 +6,7 @@
     <span>
     <a href="{{route('show_courses', $curriculum->id)}}">
       <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white hover:text-[#37584F]">
-      {{$curriculum->name}}
+      {{$curriculum->name}} ({{$curriculum->level}})
       </h5>
     </a>
     </span>

@@ -1,3 +1,5 @@
+@extends('programhead.programheadindex')
+@section('content')
 <div>
 <head>
 
@@ -14,22 +16,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
+
+
         body {
-            margin: 0;
+           
+            margin-left: 15%;
+            flex-wrap: wrap;
             padding: 0;
             font-family: "Poppins", sans-serif;
-            background: #f2f3ed;
+            background: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
             padding: 20px;
             gap: 15px;
         }
 
         .top {
+            all: revert;
             display: flex;
+            justify-content: center;
             flex-direction: row;
         }
 
         /* Styles for the program head section */
         .progHead {
+            all: revert;
             display: flex;
             flex-direction: column;
             gap: 5px;
@@ -45,16 +54,18 @@
         }
 
         .progHead span {
+            all: revert;
             display: block;
             color: #333;
         }
 
         /* Styles for the event section */
         .event {
+            all: revert;
             display: flex;
             flex-direction: column;
             gap: 5px;
-            background-color: #f2f3ed;
+            background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
             padding: 10px;
             border-radius: 8px;
             font-weight: bold;
@@ -64,11 +75,13 @@
         }
 
         .event #eventName {
+            all: revert;
             font-size: 1.2em;
             color: #3b5547;
         }
 
         .event #courseSec {
+            all: revert;
             font-size: .9em;
             font-weight: bold;
             color: #3b5547;
@@ -79,13 +92,16 @@
         
         /* Additional style for the bottom container */
         .bottom {
+            all: revert;
             display: flex;
             align-items: center;
-            justify-content: left;
+            justify-content: space-between;
             margin-top: 10px;  
+           
         }
 
         .buttons {
+            all: revert;
             margin: 0 10px;
             background-color: #3b5547;
             color: #e0e0e0;
@@ -100,6 +116,7 @@
         }
 
         .dateTime {
+            all: revert;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -118,12 +135,14 @@
         }
 
         .dateTime span {
+            all: revert;
             font-size: 14px;
             color: #333;
         }
 
         /* New style for time container */
         .timeContainer {
+            all: revert;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -133,6 +152,7 @@
 
         /* Styles for the button */
         #viewEvent {
+            all: revert;
             background-color: #3b5547;
             color: #e0e0e0;
             padding: 10px 20px;
@@ -146,11 +166,13 @@
         }
 
         #viewEvent:hover {
+            all: revert;
             background-color: #2f4537;
         }
 
 
         table {
+            all: revert;
             width: 99%;
             border-collapse: collapse;
             margin-top: 20px;
@@ -160,6 +182,7 @@
         }
 
         thead th {
+            all: revert;
             background-color: #1F342E;
             color: #fff;
             font-weight: bold;
@@ -169,12 +192,14 @@
         }
 
         tbody td {
+            all: revert;
             text-align: center;
             padding: 10px;
             border: 1px solid #ccc;
         }
 
         tbody tr:hover {
+            all: revert;
             background-color: #e9e9e9;
         }
     </style>
@@ -182,15 +207,17 @@
 <body>
 
     <div class="top">
-        <div class="progHead">
-            <span id="name">{{ $programHeadName->surname }}, {{ $programHeadName->firstname }} {{ $programHeadName->middlename }} (Program Head)</span>
-            <span id="id">{{ $eventChecklist[0]->program_head }}</span>
-        </div>
-    
+       
         <div class="event">
             <span id="eventName">{{ $eventChecklist[0]->event_name }}</span>
         </div>
     </div>
+
+    <div class="progHead">
+            <span id="name">{{ $programHeadName->surname }}, {{ $programHeadName->firstname }} {{ $programHeadName->middlename }} (Program Head)</span>
+            <span id="id">{{ $eventChecklist[0]->program_head }}</span>
+    </div>
+    
 
     <div class="bottom">
         <div class="dateTime">
@@ -201,11 +228,16 @@
                 <span id="endTime">{{ $eventChecklist[0]->time_end }}</span>
             </div>
         </div>
+
+        <div>
     
         <button class="buttons" data-bs-toggle="modal" data-bs-target="#descriptionModal">DESCRIPTION</button>
         <button class="buttons" onclick="document.getElementById('updateEventAttendanceForm').submit()" class="btn-add" id="add">SAVE</button>
         <button class="buttons" data-bs-toggle="modal" data-bs-target="#editModal" class="btn-add" id="add">EDIT</button>
         <button class="buttons" onclick="if(confirm('Are you sure you want to delete this?')) { document.getElementById('deleteEventAttendanceForm').submit() }" class="btn-add" id="add">DELETE</button>
+
+        
+        </div>
     </div>
 
     <!-- TABLE -->
@@ -386,3 +418,4 @@
 
 </body>
 </div>
+@endsection

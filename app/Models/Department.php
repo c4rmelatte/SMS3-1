@@ -19,4 +19,5 @@ class Department extends Model
         return $this->belongsTo(Building::class);
     }
 
+
 }

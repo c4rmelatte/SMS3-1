@@ -78,18 +78,9 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
                         <input type="text" name="department" id="department"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Department" required="" value="CECT" readonly/>
-                    </div>
+                            placeholder="Department" required="" value="{{ session('userDepartment') }}" readonly/>
 
-                    <!-- YEAR LEVEL -->
-                    <div class="col-span-4 sm:col-span-2">
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year Level</label>
-                        <select name="studentYear" id="studentYear"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Select Year Level</option>
-                            <option value="3">Third Year</option>
-                        </select>
+                            <input type="hidden" name="department_id" id="department_id">
                     </div>
 
                     <!-- COURSE -->
@@ -97,22 +88,26 @@
                         <label for="category"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course</label>
 
-                        <select name="studentCourse" id="studentCourse"
+                        <select name="studentCourse" id="studentCourse" required
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Select Course</option>
-                            <option value="BSIT">BSIT</option>
+                            <option selected disabled>Select Course</option>
+                            @foreach (session('courses') as $course)
+                            <option value="{{ $course->name }}">{{ $course->name }}</option>
+                            @endforeach                      
                         </select>
                     </div>
 
-                     <!-- BLOCK/SECTION -->
-                     <div class="col-span-4 sm:col-span-2">
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Block/Section</label>
 
-                        <select name="studentSection" id="studentSection"
+                     <!-- SECTION -->
+                     <div class="col-span-4 sm:col-span-2">
+                        <label for="studentSection"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year Level - Block</label>
+                        <select name="studentSection" id="studentSection" required
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Select Block/Section</option>
-                            <option value="1">Block 1</option>
+                            <option selected disabled>Select a Section</option>
+                            @foreach ($sections as $section)
+                            <option value="{{ $section->year_level }} - {{ $section->block }}">{{ $section->year_level }} - {{ $section->block }}</option>
+                            @endforeach   
                         </select>
                     </div>
 
@@ -183,5 +178,15 @@
             </form>
         </div>
     </div>
+
+    <script>
+
+        // Set the hidden input value to the selected department's ID when the dropdown changes
+        document.getElementById('department').addEventListener('change', function() {
+             const departmentId = this.value;  // This should be the ID, not the name
+             document.getElementById('department_id').value = departmentId;  // Save the department ID in the hidden field
+        });
+
+        </script>
 
 </div>

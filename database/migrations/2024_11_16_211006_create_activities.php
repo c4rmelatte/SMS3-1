@@ -17,15 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('label_activity');
+            $table->string('label_student');
             $table->string('label_term');
-            $table->unsignedInteger('score');
             $table->unsignedInteger('max_score');
             
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
 
-            $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->unsignedBigInteger('subject_id');
+            $table->foreign('subject_id')->references('id')->on('assigned_subject')->onDelete('cascade');;
         });
     }
 

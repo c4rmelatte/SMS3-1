@@ -1,122 +1,40 @@
-
-<div>
+@extends('programhead.programheadindex')
+@section('content')
 <head>
+    <!-- Tailwind CSS CDN link -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- CSS bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- Google Fonts (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
-
-    <!-- Icons -->
+    <!-- Icons (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-[#f2f3ed] font-poppins p-6">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: "Poppins", sans-serif;
-            background: #f2f3ed;
-        }
-
-        .create{
-            
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-
-
-        .btn-create{
-            background-color: #2f725f;
-            color: #e0e0e0;
-            width: 10%;
-            padding: 10px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-        }
-
-        .btn-create:hover {
-            background-color: #245d4a;
-        }
-
-
-        .card {
-            background-color: #a7d4c2; /* Light green background for odd cards */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            margin: 10px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Adjustments for the text inside the card */
-        .card p {
-            margin: 0;
-            color: white;
-            font-style: italic;
-            font-size: 16px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Style for alternative card color */
-        .card:nth-child(even) {
-            background-color: white;
-        }
-
-        .card:nth-child(even) span {
-            color: black;
-        }
-
-    
-    </style>
-        
-<body>
-
-<div class="employee">
-    <span id="programHead">{{ $programHead->surname }}, {{ $programHead->firstname }} {{ $programHead->middlename }}</span><br>
-    <span id="programHeadName">{{ $programHeadID }}</span>
-</div>
-
-<form action="{{ route('create.events') }}" method="get">
-    <div class="create mt-3">
-        
-        <input type="hidden" name="programHeadID" value="{{ $programHeadID }}">
-        <button type="submit" class="btn-create" id="btnCreate">+ CREATE</button>
-        
+    <div class="employee mb-6">
+        <span id="programHead" class="text-lg font-semibold">{{ $programHead->surname }}, {{ $programHead->firstname }} {{ $programHead->middlename }}</span><br>
+        <span id="programHeadName" class="text-gray-700">{{ $programHeadID }}</span>
     </div>
-</form>
 
-@foreach($events as $event)
+    <form action="{{ route('create.events') }}" method="get">
+        <div class="flex justify-center items-center mt-6 mb-6">
+            <input type="hidden" name="programHeadID" value="{{ $programHeadID }}">
+            <button type="submit" class="bg-[#2f725f] text-[#e0e0e0] w-[10%] py-2 px-4 font-bold rounded-lg shadow-md hover:bg-[#245d4a] transition-colors">+ CREATE</button>
+        </div>
+    </form>
 
-    <div class="card" onclick="document.getElementById('{{ $event->event_name }}').submit()">
-
+    @foreach($events as $index => $event)
+    <div class="bg-{{ $index % 2 == 0 ? '[#2f725f]' : 'white' }} 
+                {{ $index % 2 == 0 ? 'text-white' : 'text-black' }} 
+                rounded-lg shadow-md mb-4 p-4 cursor-pointer hover:shadow-lg transition-shadow"
+         onclick="document.getElementById('{{ $event->event_name }}').submit()">
         <form id="{{ $event->event_name }}" action="{{ route('show.event.events') }}" method="get">
-
             <input type="hidden" name="eventName" value="{{ $event->event_name }}">
-
-            <span id="eventSched">{{ $event->event_name }}</span>
-
+            <span class="font-medium text-lg">{{ $event->event_name }}</span>
         </form>
-
     </div>
-
 @endforeach
-    
+
+
 </body>
-</div>

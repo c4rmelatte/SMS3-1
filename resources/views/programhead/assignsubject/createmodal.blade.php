@@ -41,28 +41,88 @@
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <input type="hidden" name="assigned_by" id="{{$professorID}}" value="{{$professorID}}">
+
                     <div>
-                        <label for="subject_id"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SELECT SUBJECT</label>
-                        <select id="subject_id" name="subject_id"
+                        <label for="department_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SELECT
+                            DEPARTMENT</label>
+                        <select id="department_id" name="department_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-                            @foreach ($subjects as $subject) 
-                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                            <option value="" selected disabled>Select a Department</option>
+                            @foreach ($departments as $department)
+                                <option value="{{ $department->id }}">
+                                    {{ $department->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div>
-                        <label for="prof_id"
+                        <label for="course_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SELECT COURSE</label>
+                        <select id="course_id" name="course_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                            <option value="" selected disabled>Select a Course</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="curriculum_id"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SELECT
+                            CURRICULUM</label>
+                        <select id="curriculum_id" name="curriculum_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                            <option value="" selected disabled>Select a Curriculum</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="year_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SELECT
+                            YEAR LEVEL</label>
+                        <select id="year_id" name="year_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                            <option value="" selected disabled>Select a Year Level</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="subject_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SELECT SUBJECT</label>
+                        <select id="subject_id" name="subject_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+                            <option value="" selected disabled>Select a Subject</option>
+
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <label for="prof_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SELECT
                             PROFESSOR</label>
                         <select id="prof_id" name="prof_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                             @foreach ($professors as $professor)
-                                <option value="{{$professor->id}}">
-                                    Prof. {{$professor->surname}}, {{$professor->firstname}} {{$professor->middlename}}
+                                <option value="{{ $professor->id }}">
+                                    {{ $professor->surname }}, {{ $professor->firstname }} {{ $professor->middlename }}
                                 </option>
                             @endforeach
+
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <label for="section_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SELECT STUDENT'S YEAR AND BLOCK/SECTION
+                        </label>
+                        <select id="section_id" name="section_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+                                <option value="" selected disabled> Select a Year and Block/Section
+
+                                </option>
+
                         </select>
                     </div>
 
@@ -81,3 +141,136 @@
         </div>
     </div>
 </div>
+<script>
+    // JavaScript Variables
+    const departmentDropdown = document.querySelector('#department_id');
+    const courseDropdown = document.querySelector('#course_id');
+    const curriculumDropdown = document.querySelector('#curriculum_id');
+    const yearLevelDropdown = document.querySelector('#year_id');
+    const subjectDropdown = document.querySelector('#subject_id');
+    const sectionDropdown = document.querySelector('#section_id');
+
+    // Assuming this data is passed from the backend
+    const courses = @json($courses);
+    const curriculums = @json($curriculums);
+    const subjects = @json($subjects);
+    const departments = @json($departments);
+    const sections = @json($section);  // Pass the array of sections from PHP to JavaScript
+
+    let sectionsArray = Object.values(sections); // Converts object to an array of values
+    console.log(sectionsArray);  // Check what the array looks like
+
+
+
+    // Update the course dropdown when a department is selected
+    function updateCourseDropdown() {
+        // Clear the course dropdown
+        courseDropdown.innerHTML = '<option value="" selected disabled>Select a Course</option>';
+        curriculumDropdown.innerHTML = '<option value="" selected disabled>Select a Curriculum</option>';
+        yearLevelDropdown.innerHTML = '<option value="" selected disabled>Select a Year Level</option>';
+        subjectDropdown.innerHTML = '<option value="" selected disabled>Select a Subject</option>';
+        sectionDropdown.innerHTML = '<option value="" selected disabled>Select a Year and Block/Section</option>';
+
+        const selectedDepartmentId = departmentDropdown.value;
+        const filteredCourses = courses.filter(course => course.department_id == selectedDepartmentId);
+
+        filteredCourses.forEach(course => {
+            const option = document.createElement('option');
+            option.value = course.id;
+            option.textContent = course.name;
+            courseDropdown.appendChild(option);
+        });
+
+
+    }
+
+    // Update the curriculum dropdown when a course is selected
+    function updateCurriculumDropdown() {
+
+        curriculumDropdown.innerHTML = '<option value="" selected disabled>Select a Curriculum</option>';
+        yearLevelDropdown.innerHTML = '<option value="" selected disabled>Select a Year Level</option>';
+        subjectDropdown.innerHTML = '<option value="" selected disabled>Select a Subject</option>';
+
+        const selectedCourseId = courseDropdown.value;
+        const filteredCurriculums = curriculums.filter(curriculum => curriculum.course_id == selectedCourseId);
+
+        filteredCurriculums.forEach(curriculum => {
+            const option = document.createElement('option');
+            option.value = curriculum.id;
+            option.textContent = curriculum.name;
+            curriculumDropdown.appendChild(option);
+        });
+
+    }
+
+
+    // Update the year level dropdown when a curriculum is selected
+    function updateYearLevelDropdown() {
+
+        yearLevelDropdown.innerHTML = '<option value="" selected disabled>Select a Year Level</option>';
+        subjectDropdown.innerHTML = '<option value="" selected disabled>Select a Subject</option>';
+
+
+        const selectedCurriculumId = curriculumDropdown.value;
+        const selectedCurriculum = curriculums.find(curriculum => curriculum.id == selectedCurriculumId);
+        const filteredYearLevels = [selectedCurriculum]; // Assuming year level is embedded in the curriculum object
+
+        filteredYearLevels.forEach(curriculum => {
+            const option = document.createElement('option');
+            option.value = curriculum.id;
+            option.textContent = curriculum.level; // Adjust if necessary
+            yearLevelDropdown.appendChild(option);
+        });
+
+    }
+
+    // Update the subject dropdown when a year level is selected
+    function updateSubjectDropdown() {
+
+        subjectDropdown.innerHTML = '<option value="" selected disabled>Select a Subject</option>';
+
+
+        const selectedCurriculumId = curriculumDropdown.value;
+        const filteredSubjects = subjects.filter(subject => subject.curriculum_id == selectedCurriculumId);
+
+        filteredSubjects.forEach(subject => {
+            const option = document.createElement('option');
+            option.value = subject.id;
+            option.textContent = subject.name;
+            subjectDropdown.appendChild(option);
+        });
+
+    }
+
+
+    function updateSectionDropdown() {
+
+        sectionDropdown.innerHTML = '<option value="" selected disabled>Select a Year and Block/Section</option>';
+    
+    const selectedCourseId = courseDropdown.value;
+    console.log("Selected course ID:", selectedCourseId); // Check if course is selected
+    
+    if (!selectedCourseId) return;
+
+    const filteredSections = sections.filter(section => section.course_id == selectedCourseId);
+    console.log("Filtered Sections:", filteredSections); // Log filtered sections
+
+    filteredSections.forEach(section => {
+        const option = document.createElement('option');
+        option.value = section.id;
+        option.textContent = `${section.year_level} - Block/Section ${section.block}`;
+        sectionDropdown.appendChild(option);
+    });
+}
+
+
+
+
+    // Event listeners
+    departmentDropdown.addEventListener('change', updateCourseDropdown);
+    courseDropdown.addEventListener('change', updateCurriculumDropdown);
+    curriculumDropdown.addEventListener('change', updateYearLevelDropdown);
+    yearLevelDropdown.addEventListener('change', updateSubjectDropdown);
+    courseDropdown.addEventListener('change', updateSectionDropdown);
+
+</script>

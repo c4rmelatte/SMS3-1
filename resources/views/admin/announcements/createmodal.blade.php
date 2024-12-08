@@ -36,74 +36,103 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="#">
+            <form action="{{route('announcement.store')}}" method="post">
+                @csrf
                 <div class="grid gap-4 mb-4 grid-cols-1">
+
+                    <!-- announcement title -->
                     <div>
-                        <label for="name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Announcement
+                        <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Announcement
                             Title</label>
-                        <input type="text" name="name" id="name"
+                        <input type="text" name="title" id="title"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Type announcement title" required="">
+                            placeholder="Type announcement title">
                     </div>
 
-                    <div>
-                        <label for="category"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Recipient/s</label>
-                        <div class="grid grid-cols-3">
-                            <div class="space-y-2">
-                                <input type="checkbox" id="students" name="students" value="students"
-                                    class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
-                                <label for="students"
-                                    class="text-sm font-medium text-gray-900 dark:text-white">STUDENTS</label>
-                            </div>
-
-                            <div class="space-y-2">
-                                <input type="checkbox" id="registrar" name="registrar" value="registrar"
-                                    class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
-                                <label for="registrar"
-                                    class="text-sm font-medium text-gray-900 dark:text-white">REGISTRAR</label>
-                            </div>
-
-                            <div class="space-y-2">
-                                <input type="checkbox" id="programhead" name="programhead" value="programhead"
-                                    class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
-                                <label for="programhead"
-                                    class="text-sm font-medium text-gray-900 dark:text-white">PROGRAM
-                                    HEAD</label>
-                            </div>
-
-                            <div class="space-y-2">
-                                <input type="checkbox" id="professor" name="professor" value="professor"
-                                    class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
-                                <label for="professor"
-                                    class="text-sm font-medium text-gray-900 dark:text-white">PROFESSOR</label>
-                            </div>
-
-                            <div class="space-y-2">
-                                <input type="checkbox" id="hr" name="hr" value="hr"
-                                    class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
-                                <label for="hr" class="text-sm font-medium text-gray-900 dark:text-white">HR</label>
-                            </div>
-
-                            <div class="space-y-2">
-                                <input type="checkbox" id="all" name="all" value="all"
-                                    class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
-                                <label for="all" class="text-sm font-medium text-gray-900 dark:text-white">ALL</label>
-                            </div>
-                        </div>
-
-
-                    </div>
-
+                    <!-- description --> 
                     <div class="">
                         <label for="description"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea id="description" rows="4"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                            placeholder="Write announcement here"></textarea>
+                        <input type="text" name="description" id="description"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            placeholder="Type announcement description">
                     </div>
+
+                    <!-- targets -->
+                    <!-- all -->
+                    <div>
+                        <label for="" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Announce to</label>
+                        <div class="grid grid-cols-3">
+                                <div class="space-y-2">
+                                    <input type="checkbox" id="all" name=" targets[]" value="all"
+                                        class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
+                                    <label for="all"
+                                        class="text-sm font-medium text-gray-900 dark:text-white">All</label>
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <!-- department -->
+                    <div>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departments</label>
+                        <div class="grid grid-cols-3">
+                            @forelse ($departments as $department)
+                                <div class="space-y-2">
+                                    <input type="checkbox" id="{{$department->name}}" name=" targets[]" value=" {{$department->name}}"
+                                        class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
+                                    <label for="{{$department->name}}"
+                                        class="text-sm font-medium text-gray-900 dark:text-white">{{$department->name}}</label>
+                                </div>
+                            @empty
+                                 <div class="space-y-2">
+                                   <p>No Departments Added.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+
+                    <!-- building -->
+                    <div>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Buildings</label>
+                        <div class="grid grid-cols-3">
+                            @forelse ($buildings as $building)
+                                <div class="space-y-2">
+                                    <input type="checkbox" id="{{$building->name}}" name=" targets[]" value="{{$building->name}}"
+                                        class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
+                                    <label for="{{$building->name}}"
+                                        class="text-sm font-medium text-gray-900 dark:text-white">{{$building->name}}</label>
+                                </div>
+                            @empty
+                                <div class="space-y-2">
+                                    <p>No Buildings Added.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+
+
+                    <!-- subject -->
+                    <div>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subjects</label>
+                        <div class="grid grid-cols-3">
+                            @forelse ($subjects as $subject)
+                                 <div class="space-y-2">
+                                    <input type="checkbox" id="{{$subject->name}}" name=" targets[]" value="{{$subject->name}}"
+                                        class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-300 rounded">
+                                    <label for="{{$subject->name}}"
+                                        class="text-sm font-medium text-gray-900 dark:text-white">{{$subject->name}}</label>
+                                </div>
+                            @empty
+                                <div class="space-y-2">
+                                    <p>No Subject Added.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                    <!-- .... -->
                 </div>
+
+                <!-- buttton -->
                 <button type="submit"
                     class="text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                     <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"

@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('password');
+            $table->unsignedBigInteger('department_id');
+            $table->foreign('department_id')->nullable()->references('id')->on('departments')->onDelete('cascade');;
             $table->string('department');
             $table->string('category');
             $table->string('position');

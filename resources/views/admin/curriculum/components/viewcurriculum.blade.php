@@ -24,7 +24,7 @@
                d="M1 5.917 5.724 10.5 15 1.5" />
             </svg>
             <span>
-            {{$subject->name}}
+            {{$subject->code}} - {{$subject->name}} 
             </span>
             </li>
         
